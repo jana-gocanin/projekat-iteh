@@ -26,8 +26,8 @@ function App()  {
           </>
           }
         />
-        <Route path="/cart" element={<><Cart cartDogs={cartDogs} /><ContactForm /></>} />
-        <Route path="/contact" element={<ContactForm/>} />
+        <Route path="/cart" element={<><NavBar cartNum={cartNum} /><Cart cartDogs={cartDogs} /><ContactForm /></>} />
+        <Route path="/contact" element={<><NavBar cartNum={cartNum} /><ContactForm/></>} />
       </Routes>
 
     </BrowserRouter>

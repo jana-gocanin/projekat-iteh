@@ -38,8 +38,8 @@ function Login() {
       <span className="circle-login-2"></span>
       <span className="circle-login-3"></span>
       <span className="circle-login-4"></span>
-      {/* <p className="txt-logo-login">EQ</p> */}
-      {/* <img src={logo} className="img-logo-blue" /> */}
+      { <p className="txt-logo-login">{ <img src={require('./img/logo.png')} /> }</p> }
+      
       <div className="div-login" style={{ color: "#0077B6" }}>
         <h3>Login</h3>
         <form className="form-login" onSubmit={handleLogin}>

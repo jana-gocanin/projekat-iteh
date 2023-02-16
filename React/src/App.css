@@ -258,8 +258,8 @@ button:hover {
   border-left-style: hidden;
   border-right-style: hidden;
   border-width: 1.5px;
-  background-color: transparent;
-  width: 100%;
+  background-color: #90e0ef;
+  width: 95%;
   outline: none;
 }
 .txt-login-error {
@@ -330,6 +330,8 @@ button:hover {
   margin-left: auto;
   width: fit-content;
   margin-top: 100px;
+  position: relative;
+  top: -27px;
 }
 .div-login {
   height: fit-content;
@@ -352,7 +354,7 @@ button:hover {
   border-right-style: none;
   border-width: 1.5px;
   background-color: #90e0ef;
-  width: 100%;
+  width: 95%;
   margin-top: 20px;
   outline: none;
 }
@@ -371,17 +373,18 @@ button:hover {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-radius: 32px;
-  background-color: #faa307;
+  background-color: rgb(222, 168, 214);
   padding: 20px;
   padding-bottom: 10px;
+  color: #333;
 }
 .input-name-register {
   border-top-style: hidden;
   border-left-style: hidden;
   border-right-style: hidden;
   border-width: 1.5px;
-  background-color: transparent;
-  width: 100%;
+  background-color: rgb(222, 168, 214);
+  width: 95%;
   margin-top: 20px;
   outline: none;
 }
@@ -408,8 +411,8 @@ button:hover {
   border-left-style: hidden;
   border-right-style: hidden;
   border-width: 1.5px;
-  background-color: transparent;
-  width: 100%;
+  background-color: rgb(222, 168, 214);
+  width: 95%;
   outline: none;
 }
 .input-password-reenter{
@@ -423,7 +426,7 @@ button:hover {
 }
 .btn-register {
   color: white;
-  background-color: #dc2f02;
+  background-color: rgb(222, 168, 214);
   border-radius: 19px;
   border-style: none;
   padding-bottom: 10px;
@@ -432,6 +435,7 @@ button:hover {
   padding-right: 15px;
   margin-top: 20px;
   margin-bottom: 20px;
+  color: #333;
 }
 .txt-register {
   font-size: 15px;

@@ -91,10 +91,10 @@ function Register() {
       <span className="circle-register-2"></span>
       <span className="circle-register-3"></span>
       <span className="circle-register-4"></span>
-      {/* <p className="txt-logo-register">EQ</p> */}
-      {/* <img src={logo} className="img-logo-orange" /> */}
+      { <p className="txt-logo-register">{ <img src={require('./img/logo.png')} /> }</p> }
+      
 
-      <div className="div-register" style={{ color: "#DC2F02" }}>
+      <div className="div-register" >
         <h3>Registracija</h3>
         <form className="form-register" onSubmit={handleRegister}>
           <input
@@ -106,7 +106,7 @@ function Register() {
           />
           <p className="txt-register">Ime</p>
           <input
-            className="input-korisnicko-ime"
+            className="input-name-register"
             type="email"
             required
             name="email"
