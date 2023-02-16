@@ -62,9 +62,12 @@ function NavBar({cartNum}) {
                 <FaDog style={{ marginLeft: 10 }} />
                 <div className="cart-num">{cartNum}</div>
             </Link>
-            <Link to="/contact" style={{ marginLeft: 20 }}>Kontakt</Link>
+                <Link to="/contact" style={{ marginLeft: 20 }}>Kontakt</Link>
+                <div className="div-time-api">
+                          <p className="txt-time-api"></p>
+                        </div>
             <a
-                              className="dropdown-item"
+                              //className="dropdown-item"
                               onClick={handleLogout}
                               href="/login"
                             >
