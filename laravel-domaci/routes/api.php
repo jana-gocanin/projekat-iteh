@@ -37,21 +37,24 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile', function(Request $request) {
-        return auth()->user();
-    });
-    Route::post('pas/add', [PasController::class, 'add'])->name('pas.add');
-    Route::delete('pas/delete/{id}', [PasController::class, 'delete'])->name('pas.delete');
-    Route::put('pas/update/{id}', [PasController::class, 'update'])->name('pas.update');
+Route::group(
+    ['middleware' => ['auth:sanctum']],
+    function () {
+        Route::get('/profile', function (Request $request) {
+            return auth()->user();
+        }
+        );
+        Route::post('pas/add', [PasController::class, 'add'])->name('pas.add');
+        Route::delete('pas/delete/{id}', [PasController::class, 'delete'])->name('pas.delete');
+        Route::put('pas/update/{id}', [PasController::class, 'update'])->name('pas.update');
 
-    Route::post('udomitelj/add', [UdomiteljController::class, 'add'])->name('udomitelj.add');
-    Route::delete('udomitelj/delete/{id}', [UdomiteljController::class, 'delete'])->name('udomitelj.delete');
-    Route::put('udomitelj/update/{id}', [UdomiteljController::class, 'update'])->name('udomitelj.update');
+        Route::post('udomitelj/add', [UdomiteljController::class, 'add'])->name('udomitelj.add');
+        Route::delete('udomitelj/delete/{id}', [UdomiteljController::class, 'delete'])->name('udomitelj.delete');
+        Route::put('udomitelj/update/{id}', [UdomiteljController::class, 'update'])->name('udomitelj.update');
 
-    Route::post('ugovor/add', [UgovorController::class, 'add'])->name('ugovor.add');
-    Route::delete('ugovor/delete/{id}', [UgovorController::class, 'delete'])->name('ugovor.delete');
+        Route::post('ugovor/add', [UgovorController::class, 'add'])->name('ugovor.add');
+        Route::delete('ugovor/delete/{id}', [UgovorController::class, 'delete'])->name('ugovor.delete');
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/logout', [AuthController::class, 'logout']);
     }
 );

@@ -14,8 +14,6 @@ function App()  {
   const [cartNum, setCartNum] = useState(0);
   return (
     <BrowserRouter className="App">
-      
-     
       <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
