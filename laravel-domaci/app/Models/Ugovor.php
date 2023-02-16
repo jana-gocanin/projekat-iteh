@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Ugovor extends Model
 {
     use HasFactory;
+    public function pas()
+    {
+        return $this->belongsTo(Pas::class);
+    }
+    public function udomitelj()
+    {
+        return $this->belongsTo(Udomitelj::class);
+    }
 
     protected $fillable = [
         'potpisano',
@@ -16,5 +24,5 @@ class Ugovor extends Model
         'udomitelj_id'
     ];
 
-    
+
 }

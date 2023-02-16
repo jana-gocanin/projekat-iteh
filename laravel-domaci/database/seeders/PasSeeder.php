@@ -19,21 +19,24 @@ class PasSeeder extends Seeder
             'ime' => 'Kiki',
             'godine' => 2.5,
             'boja' => 'crna',
-            'tezina' => 5
+            'tezina' => 5,
+            'vakcina_id' => 1
         ]);
 
         Pas::create([
             'ime' => 'Bella',
             'godine' => 6,
             'boja' => 'crna-bela',
-            'tezina' => 24
+            'tezina' => 24,
+            'vakcina_id' => 2
         ]);
 
         Pas::create([
             'ime' => 'Bleki',
             'godine' => 5,
             'boja' => 'bela',
-            'tezina' => 20
+            'tezina' => 20,
+            'vakcina_id' => 3
         ]);
     }
 }

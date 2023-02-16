@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Udomitelj extends Model
+class Vakcina extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
-        'ime',
-        'prezime',
-        'datum_rodjenja',
-        'email'
+        'naziv'
     ];
-    public function ugovor()
+
+
+
+    public function pas()
     {
-        return $this->hasOne(Ugovor::class);
+        return $this->belongsTo(Pas::class);
     }
+
 }

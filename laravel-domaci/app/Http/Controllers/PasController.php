@@ -19,19 +19,19 @@ class PasController extends Controller
     public function add(Request $request)
     {
 
-        $validator = Validator::make($request->all(),[
-            'ime'=>'required|string|max:255',
-            'godine'=>'required',
-            'boja'=>'required|string|max:50',
-            'tezina'=>'required'
+        $validator = Validator::make($request->all(), [
+            'ime' => 'required|string|max:255',
+            'godine' => 'required',
+            'boja' => 'required|string|max:50',
+            'tezina' => 'required',
+            'vakcina_id' => 'required'
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
-        $requestPas = $request->only('ime', 'godine', 'boja', 'tezina');
+        $requestPas = $request->only('ime', 'godine', 'boja', 'tezina', 'vakcina_id');
         $pas = Pas::create($requestPas);
 
         return response()->json(['Pas je uspesno kreiran.', new PasJson($pas)]);
@@ -64,15 +64,15 @@ class PasController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'ime'=>'required|string|max:255',
-            'godine'=>'required',
-            'boja'=>'required|string|max:50',
-            'tezina'=>'required'
+        $validator = Validator::make($request->all(), [
+            'ime' => 'required|string|max:255',
+            'godine' => 'required',
+            'boja' => 'required|string|max:50',
+            'tezina' => 'required',
+            'vakcina_id' => 'required'
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
@@ -82,6 +82,7 @@ class PasController extends Controller
         $pas->godine = $request->godine;
         $pas->boja = $request->boja;
         $pas->tezina = $request->tezina;
+        $pas->vakcina_id = $request->vakcina_id;
 
         $pas->save();
 

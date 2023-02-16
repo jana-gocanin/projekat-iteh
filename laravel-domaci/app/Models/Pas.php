@@ -20,6 +20,10 @@ class Pas extends Model
     {
         return $this->hasOne(Ugovor::class);
     }
+    public function vakcina()
+    {
+        return $this->hasOne(Vakcina::class);
+    }
 
     public function adopted()
     {
@@ -29,5 +33,5 @@ class Pas extends Model
 
         return false;
     }
-    
+
 }

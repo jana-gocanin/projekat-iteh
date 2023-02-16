@@ -127,7 +127,12 @@ function Register() {
             id="input-password-register"
           />
           <p className="txt-register">Lozinka</p>
-
+          <p className="txt-login">
+            Imate nalog? Prijavite se{" "}
+            <a href="/login" className="link-register">
+              ovde!
+            </a>
+          </p>
           <button className="btn-register" type="submit">
             Registruj se
           </button>

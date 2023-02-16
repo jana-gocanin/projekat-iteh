@@ -14,13 +14,13 @@ class UgovorJson extends JsonResource
      */
     public function toArray($request)
     {
-        return 
-        [
-            'id' => $this->id,
-            'potpisano' => $this->potpisano,
-            'datum_potpisa' => $this->datum,
-            'pas_id' => $this->pas_id,
-            'udomitelj_id' => $this->udomitelj_id
-        ];
+        return
+            [
+                'id' => $this->id,
+                'potpisano' => $this->potpisano,
+                'datum_potpisa' => $this->datum,
+                'pas_id' => new PasJson($this->resource->pas),
+                'udomitelj_id' => new UdomiteljJson($this->resource->udomitelj)
+            ];
     }
 }

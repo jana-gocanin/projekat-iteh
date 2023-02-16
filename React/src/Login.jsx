@@ -26,6 +26,9 @@ function Login() {
         window.sessionStorage.setItem("auth_token", res.data.access_token);
         if (res.data.success == false) {
           document.getElementById("txt-login-error").style.display = "block";
+          setTimeout(function () {
+            document.getElementById("txt-login-error").style.display = "none";
+          }, 2000);
         } else {
           navigate("/");
         }
