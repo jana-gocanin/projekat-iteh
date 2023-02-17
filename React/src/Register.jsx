@@ -28,6 +28,7 @@ function Register() {
     name: "",
     email: "",
     password: "",
+    isAdmin:0
     
   });
   let navigate = useNavigate();

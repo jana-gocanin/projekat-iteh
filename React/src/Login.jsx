@@ -4,11 +4,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-function Login() {
+function Login({selektujAdmina}) {
   document.body.style.overflowY = "hidden";
   const [userData, setUserData] = useState({
     email: "",
-    password: "",
+    password: ""
+  
   });
   let navigate = useNavigate();
   function handleInput(e) {
@@ -24,6 +25,13 @@ function Login() {
       .then((res) => {
         console.log(res.data);
         window.sessionStorage.setItem("auth_token", res.data.access_token);
+          if (res.data.isAdmin == 1) {
+          selektujAdmina(1);
+          console.log('isadmin =1');
+        } else {
+          selektujAdmina(0);
+          console.log('isadmin=0');
+        }
         if (res.data.success == false) {
           document.getElementById("txt-login-error").style.display = "block";
           setTimeout(function () {

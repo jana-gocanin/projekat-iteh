@@ -6,7 +6,7 @@ import { useNavigate, Navigate} from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function NavBar({cartNum}) {
+function AdminNavBar({cartNum}) {
     
         let navigate = useNavigate();
         function handleLogout(e) {
@@ -57,13 +57,10 @@ function NavBar({cartNum}) {
       ) : (
         <>
         <div className="navBar">
-            <Link to="/">Doniraj</Link>
-            <Link to = "/cart" className="cart-items">
-                <FaDog style={{ marginLeft: 10 }} />
-                <div className="cart-num">{cartNum}</div>
-            </Link>
-                <Link to="/contact" style={{ marginLeft: 20 }}>Kontakt</Link>
+           
+            
                 
+                <Link to="/admin" style={{ marginLeft: 20 }}>Admin</Link>
                 <div className="div-time-api">
                           <p className="txt-time-api"></p>
                         </div>
@@ -84,4 +81,4 @@ function NavBar({cartNum}) {
 
     
 
-export default NavBar
+export default AdminNavBar

@@ -20,7 +20,8 @@ class PasJson extends JsonResource
             'godine' => $this->godine,
             'boja' => $this->boja,
             'tezina' => $this->tezina,
-            'vakcina_id' => $this->vakcina_id
+            'vakcina_id' => $this->vakcina_id,
+
         ];
     }
 }

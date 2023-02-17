@@ -9,26 +9,72 @@ import Login from './Login';
 import Register from './Register';
 import AdminPage from './AdminPage';
 import DogBreedsCombo from './DogBreedsCombo';
+import AdminNavBar from './AdminNavBar';
 
 
 function App()  {
   const [cartDogs, setCartDogs] = useState([]);
   const [cartNum, setCartNum] = useState(0);
+  const [isAdmin, setIsAdmin] = useState();
+  function selektujAdmina(isAdmin) {
+    setIsAdmin(isAdmin);
+    console.log(isAdmin);
+  }
   return (
     <BrowserRouter className="App">
       <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login  selektujAdmina={selektujAdmina} />} />
       <Route path="/register" element={<Register />} />
-        <Route
-          path="/"
-          element={<><NavBar cartNum={cartNum} />
-           <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} />
-          </>
-          }
-        />
-        <Route path="/cart" element={<><NavBar cartNum={cartNum} /><Cart cartDogs={cartDogs} /><ContactForm /></>} />
-        <Route path="/contact" element={<><NavBar cartNum={cartNum} /><ContactForm /></>} />
-        <Route path="/admin" element={<><NavBar cartNum={cartNum} /><AdminPage /></>} />
+      <Route
+  path="/"
+  element={isAdmin ? (
+    <>
+      <AdminNavBar />
+      <AdminPage />
+    </>
+  ) : (
+    <>
+      <NavBar cartNum={cartNum} />
+      <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} />
+    </>
+  )}
+/>
+
+
+
+        <Route path="/cart" element={isAdmin ? (
+    <>
+      <AdminNavBar />
+      <AdminPage />
+    </>
+  ) : (
+    <>
+<NavBar cartNum={cartNum} /><Cart cartDogs={cartDogs} isAdmin={isAdmin} /><ContactForm /></> 
+    
+  )}
+/> 
+
+
+
+        <Route path="/contact" element={isAdmin ? (
+    <>
+      <AdminNavBar />
+      <AdminPage />
+    </>
+  ) : (
+<><NavBar cartNum={cartNum} /><ContactForm /></>
+    
+  )}  />
+        <Route path="/admin"  element={isAdmin ? (
+    <>
+      <AdminNavBar />
+      <AdminPage />
+    </>
+  ) : (
+    <>
+      <NavBar cartNum={cartNum} />
+      <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} />
+    </> )} />
         <Route path="/breeds" element={<><NavBar cartNum={cartNum} /><DogBreedsCombo/></>} />
       </Routes>
 
