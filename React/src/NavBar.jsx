@@ -63,6 +63,7 @@ function NavBar({cartNum}) {
                 <div className="cart-num">{cartNum}</div>
             </Link>
                 <Link to="/contact" style={{ marginLeft: 20 }}>Kontakt</Link>
+                <Link to="/admin" style={{ marginLeft: 20 }}>Admin</Link>
                 <div className="div-time-api">
                           <p className="txt-time-api"></p>
                         </div>
