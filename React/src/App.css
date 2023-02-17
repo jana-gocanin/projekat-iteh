@@ -535,3 +535,10 @@ body {
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
+
+.modal-content {
+  background-image:url(img/Dog_face_pattern_and_bones.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

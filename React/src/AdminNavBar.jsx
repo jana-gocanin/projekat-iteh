@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function AdminNavBar({cartNum}) {
-    
+
         let navigate = useNavigate();
         function handleLogout(e) {
           clearInterval(intervalId);
@@ -21,32 +21,32 @@ function AdminNavBar({cartNum}) {
           axios(config).then((res) => {
             console.log(res.data);
             window.sessionStorage.setItem("auth_token", null);
-           
+
           });
-      
+
           navigate("/login");
           e.preventDefault();
         }
         useEffect(() => {
           if (window.sessionStorage.getItem("auth_token") == "null") {
             clearInterval(intervalId);
-      
+
             navigate("/login");
           }
         });
-      
+
         var intervalId = window.setInterval(function () {
-          axios
-            .get("http://worldtimeapi.org/api/timezone/Europe/Belgrade")
-            .then((res) => {
-              var mySubString = res.data.datetime.substring(
-                res.data.datetime.indexOf("T") + 1,
-                res.data.datetime.lastIndexOf(".")
-              );
-              document.getElementsByClassName("txt-time-api")[0].innerHTML =
-                mySubString;
-            })
-            .catch((e) => console.log(e));
+          // axios
+          //   .get("http://worldtimeapi.org/api/timezone/Europe/Belgrade")
+          //   .then((res) => {
+          //     var mySubString = res.data.datetime.substring(
+          //       res.data.datetime.indexOf("T") + 1,
+          //       res.data.datetime.lastIndexOf(".")
+          //     );
+          //     document.getElementsByClassName("txt-time-api")[0].innerHTML =
+          //       mySubString;
+          //   })
+          //   .catch((e) => console.log(e));
         }, 1000);
 
 
@@ -57,9 +57,9 @@ function AdminNavBar({cartNum}) {
       ) : (
         <>
         <div className="navBar">
-           
-            
-                
+
+
+
                 <Link to="/admin" style={{ marginLeft: 20 }}>Admin</Link>
                 <div className="div-time-api">
                           <p className="txt-time-api"></p>
@@ -79,6 +79,6 @@ function AdminNavBar({cartNum}) {
 )
 }
 
-    
+
 
 export default AdminNavBar

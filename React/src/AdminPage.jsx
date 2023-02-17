@@ -1,6 +1,10 @@
-import React from 'react'
+
+import React, { useState } from "react";
+
 
 function AdminPage() {
+    const [modalVisible, setModalVisible] = useState(false);
+
   return (
       <>
           <div className='container'>
@@ -31,9 +35,18 @@ function AdminPage() {
             className="collapse show list-group list-group-flush"
           >
             <li className="list-group-item py-1">
-              <a href="" className="text-reset">
-                Dodaj psa
-              </a>
+              
+              <button
+  id="btn-dodaj-psa"
+  className="btn"
+  data-toggle="modal"
+  data-target="#modalDodavanjePsa"
+  onClick={() => setModalVisible(true)}
+>
+  Dodaj psa
+</button>
+
+              
             </li>
             <li className="list-group-item py-1">
               <a href="" className="text-reset">
@@ -481,7 +494,432 @@ function AdminPage() {
       </td>
     </tr>
   </tbody>
-</table>
+              </table>
+              <>
+                  {/* <div className="modal fade" id="modalDodavanjePsa" role="dialog"> */}
+                  <div
+  className={`modal fade${modalVisible ? " show" : ""}`}
+  id="modalDodavanjePsa"
+  role="dialog"
+>
+    <div className="modal-dialog">
+      {/*Sadrzaj modala*/}
+      <div className="modal-content" style={{ border: "4px solid green" }}>
+        <div className="modal-header">
+          <button type="button" className="close" data-dismiss="modal">
+            ×
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="container tim-form">
+            <form method="post" id="dodaj-form-pas">
+              <h3 id="naslov" style={{ color: "black" }} text-align="center">
+                Dodavanje psa
+              </h3>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      style={{ border: "1px solid black" }}
+                      name="ime"
+                      className="form-control"
+                      placeholder="Ime *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      style={{ border: "1px solid black" }}
+                      name="godine"
+                      className="form-control"
+                      placeholder="Godine  *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      style={{ border: "1px solid black" }}
+                      name="boja"
+                      className="form-control"
+                      placeholder="Boja *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      style={{ border: "1px solid black" }}
+                      name="tezina"
+                      className="form-control"
+                      placeholder="Tezina *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <button
+                      id="btn-dodaj-psa"
+                      type="submit"
+                      className="btn btn-success btn-block"
+                      style={{
+                        backgroundColor: "orange",
+                        border: "1px solid black"
+                      }}
+                    >
+                      <i className="glyphicon glyphicon-plus" /> Dodaj
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-default"
+            style={{
+              color: "white",
+              backgroundColor: "orange",
+              border: "1px solid white"
+            }}
+            data-dismiss="modal"
+          >
+            Zatvori
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className="modal fade" id="modalDodavanjeUdomitelja" role="dialog">
+    <div className="modal-dialog">
+      {/*Sadrzaj modala*/}
+      <div className="modal-content" style={{ border: "4px solid green" }}>
+        <div className="modal-header">
+          <button type="button" className="close" data-dismiss="modal">
+            ×
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="container tim-form">
+            <form action="#" method="post" id="dodaj-form-udomitelj">
+              <h3 id="naslov" style={{ color: "black" }} text-align="center">
+                Dodavanje udomitelja
+              </h3>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      style={{ border: "1px solid black" }}
+                      name="ime"
+                      className="form-control"
+                      placeholder="Ime *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      style={{ border: "1px solid black" }}
+                      name="prezime"
+                      className="form-control"
+                      placeholder="Prezime  *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="date"
+                      style={{ border: "1px solid black" }}
+                      name="datum_rodjenja"
+                      className="form-control"
+                      placeholder="Datum rodjenja *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="email"
+                      style={{ border: "1px solid black" }}
+                      name="email"
+                      className="form-control"
+                      placeholder="Email *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <button
+                      id="btnDodaj"
+                      type="submit"
+                      className="btn btn-success btn-block"
+                      style={{
+                        backgroundColor: "orange",
+                        border: "1px solid black"
+                      }}
+                    >
+                      <i className="glyphicon glyphicon-plus" /> Dodaj
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-default"
+            style={{
+              color: "white",
+              backgroundColor: "orange",
+              border: "1px solid white"
+            }}
+            data-dismiss="modal"
+          >
+            Zatvori
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className="modal fade" id="modalDodavanjeUgovora" role="dialog">
+    <div className="modal-dialog">
+      {/*Sadrzaj modala*/}
+      <div className="modal-content" style={{ border: "4px solid green" }}>
+        <div className="modal-header">
+          <button type="button" className="close" data-dismiss="modal">
+            ×
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="container tim-form">
+            <form action="#" method="post" id="dodaj-form-ugovor">
+              <h3 id="naslov" style={{ color: "black" }} text-align="center">
+                Dodavanje ugovora
+              </h3>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <input
+                      type="checkbox"
+                      style={{ border: "1px solid black" }}
+                      name="potpisano"
+                      className="form-control"
+                      placeholder="Potpisano *"
+                      defaultValue={1}
+                      defaultChecked=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="date"
+                      style={{ border: "1px solid black" }}
+                      name="datum_potpisa"
+                      className="form-control"
+                      placeholder="Datum potpisa  *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <select name="pas_id">
+                      {/*?php if (!empty($psi)) {
+                                      foreach ($neudomljeniPsiArray as $pas) {
+                                              ?*/}
+                      <option value="<?php echo $pas['id'] ?>">
+                        {/*?php echo $pas['ime'] ?*/}[
+                        {/*?php echo $pas['id'] ?*/}]
+                      </option>
+                      {/*?php
+                                          }
+                                      } else {
+                                      ?*/}
+                      <option value="null">Nema psa</option>
+                      {/*?php
+                                      }
+                                      ?*/}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <select name="udomitelj_id">
+                      {/*?php if (!empty($udomitelji)) {
+                                          foreach ($udomiteljiArray as $udomitelj) {
+                                              ?*/}
+                      <option value="<?php echo $udomitelj['id'] ?>">
+                        {/*?php echo $udomitelj['ime'] ?*/}[
+                        {/*?php echo $udomitelj['id'] ?*/}]
+                      </option>
+                      {/*?php
+                                          }
+                                      } else {
+                                          ?*/}
+                      <option value="null">Nema udomitelja</option>
+                      {/*?php
+                                      }
+                                      ?*/}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <button
+                      id="btnDodaj"
+                      type="submit"
+                      className="btn btn-success btn-block"
+                      style={{
+                        backgroundColor: "orange",
+                        border: "1px solid black"
+                      }}
+                    >
+                      <i className="glyphicon glyphicon-plus" /> Dodaj
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-default"
+            style={{
+              color: "white",
+              backgroundColor: "orange",
+              border: "1px solid white"
+            }}
+            data-dismiss="modal"
+          >
+            Zatvori
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className="modal fade" id="modalIzmenaUgovora" role="dialog">
+    <div className="modal-dialog">
+      {/* Modal sadrzaj*/}
+      <div className="modal-content">
+        <div className="modal-header">
+          <button type="button" className="close" data-dismiss="modal">
+            ×
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="container tim-form">
+            <form action="#" method="post" id="izmeni-form-ugovor">
+              <h3 style={{ color: "black" }}>Izmena ugovora</h3>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <input
+                      id="ugovor-id"
+                      type="text"
+                      name="id"
+                      className="form-control"
+                      placeholder="Id ugovora *"
+                      defaultValue=""
+                      readOnly=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      id="ugovor-potpisano"
+                      type="checkbox"
+                      name="potpisano"
+                      className="form-control"
+                      placeholder="Potpisano *"
+                      defaultValue={1}
+                      defaultChecked=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <input
+                      id="ugovor-datum"
+                      type="date"
+                      name="datum_potpisa"
+                      className="form-control"
+                      placeholder="Datum potpisa *"
+                      defaultValue=""
+                    />
+                  </div>
+                  <div className="form-group">
+                    <select name="pas_id">
+                      {/*?php if (!empty($psi)) {
+                                          foreach ($psiArray as $pas) {
+                                              ?*/}
+                      <option
+                        id="ugovor-pas-id-<?php echo $pas['id'] ?>"
+                        value="<?php echo $pas['id'] ?>"
+                      >
+                        {/*?php echo $pas['ime'] ?*/}[
+                        {/*?php echo $pas['id'] ?*/}]
+                      </option>
+                      {/*?php
+                                          }
+                                      } else {
+                                          ?*/}
+                      <option value="null">Nema psa</option>
+                      {/*?php
+                                      }
+                                      ?*/}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <select name="udomitelj_id">
+                      {/*?php if (!empty($udomitelji)) {
+                                          foreach ($udomiteljiArray as $udomitelj) {
+                                              ?*/}
+                      <option
+                        id="ugovor-udomitelj-id-<?php echo $udomitelj['id'] ?>"
+                        value="<?php echo $udomitelj['id'] ?>"
+                      >
+                        {/*?php echo $udomitelj['ime'] ?*/}[
+                        {/*?php echo $udomitelj['id'] ?*/}]
+                      </option>
+                      {/*?php
+                                          }
+                                      } else {
+                                          ?*/}
+                      <option value="null">Nema udomitelja</option>
+                      {/*?php
+                                      }
+                                      ?*/}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <button
+                      id="btnIzmeni"
+                      type="submit"
+                      className="btn btn-success btn-block"
+                      style={{
+                        color: "white",
+                        backgroundColor: "orange",
+                        border: "1px solid white"
+                      }}
+                    >
+                      <i className="glyphicon glyphicon-pencil" /> Izmeni
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-default"
+            data-dismiss="modal"
+          >
+            Zatvori
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</>
+
 </div>
 </>
 

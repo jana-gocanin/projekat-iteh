@@ -1,14 +1,18 @@
 import React from "react";
 import CartDog from "./cartDog";
-import Navigate from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-const Cart = ({cartDogs, isAdmin}) => {
+const Cart = ({ cartDogs, isAdmin }) => {
+  let navigate = useNavigate();
+  console.log(isAdmin);
   if (isAdmin==1){
-    return <Navigate to="/" />;
+    navigate("/");
+    return null;
   }
-    return (
+  return (
    
-        <div className="cart-container">
+    <div className="cart-container">
+       
         <h1>Ovo je Vasa korpa</h1>
         <div className="psi-korpa">
           {cartDogs.map((dog) => (

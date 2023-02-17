@@ -15,9 +15,10 @@ import AdminNavBar from './AdminNavBar';
 function App()  {
   const [cartDogs, setCartDogs] = useState([]);
   const [cartNum, setCartNum] = useState(0);
-  const [isAdmin, setIsAdmin] = useState();
+  const [isAdmin, setIsAdmin] = useState(window.sessionStorage.getItem('isAdmin'));
   function selektujAdmina(isAdmin) {
     setIsAdmin(isAdmin);
+    
     console.log(isAdmin);
   }
   return (
