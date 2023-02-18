@@ -46,13 +46,20 @@ function DogBreedsCombo() {
         </label>
   
         {breedInfo && (
-          <div>
+          <div className="dogBreed">
             <h2>{breedInfo.name}</h2>
             <img src={breedInfo.url} alt={breedInfo.name} />
             <p>Weight: {breedInfo.breeds[0]?.weight?.metric}</p>
             <p>Height: {breedInfo.breeds[0]?.height?.metric}</p>
             <p>Bred for: {breedInfo.breeds[0]?.bred_for}</p>
             <p>Breed group: {breedInfo.breeds[0]?.breed_group}</p>
+            <img className="dogbreed-img" src={breedInfo.url} alt={breedInfo.name} />
+            <div className="dogBreed-body">
+            <p>Weight: {breedInfo.breeds[0].weight?.metric}</p>
+            <p>Height: {breedInfo.breeds[0].height?.metric}</p>
+            <p>Bred for: {breedInfo.breeds[0].bred_for}</p>
+            <p>Breed group: {breedInfo.breeds[0].breed_group}</p>
+            </div>
           </div>
         )}
       </div>
