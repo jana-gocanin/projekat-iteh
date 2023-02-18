@@ -10,6 +10,7 @@ import Register from './Register';
 import AdminPage from './AdminPage';
 import DogBreedsCombo from './DogBreedsCombo';
 import AdminNavBar from './AdminNavBar';
+import Mapa from './mapa';
 
 
 function App()  {
@@ -63,7 +64,7 @@ function App()  {
       <AdminPage />
     </>
   ) : (
-<><NavBar cartNum={cartNum} /><ContactForm /></>
+<><NavBar cartNum={cartNum} /> <div id="map-container" style={{display: 'flex', justifyContent: 'center'}}><Mapa /></div> <ContactForm /></>
     
   )}  />
         <Route path="/admin"  element={isAdmin ? (

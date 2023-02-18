@@ -1,9 +1,94 @@
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Modal from "@mui/material/Modal";
 
-import React, { useState } from "react";
-
-
+const style = {
+  color: "white",
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "#76c893",
+  borderStyle: "none",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 10 + "px",
+};
 function AdminPage() {
+  
     const [modalVisible, setModalVisible] = useState(false);
+    const [PasList, setPasList] = useState();
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [userData, setUserData] = useState({
+      ime: "",
+      godine: "",
+      boja: "",
+      tezina: "",
+      vakcina_id: "",
+    });
+    function refreshPas() {
+      var config = {
+        method: "get",
+        url: "pas/getAll", //iz laravela
+        headers: {
+          Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+        },
+      };
+      axios(config).then((res) => {
+        setPasList(res.data);
+      });
+    }
+    let navigate = useNavigate();
+    function handleInput(e) {
+      let newUserData = userData;
+      newUserData[e.target.name] = e.target.value;
+      setUserData(newUserData);
+    }
+    // function handlePasAdd(e) {
+    //   e.preventDefault();
+    //   var config = {
+    //     method: "post",
+    //     url: "pas/add", //iz laravela
+    //     headers: {
+    //       Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+    //     },
+    //     data: userData,
+    //   };
+    //   axios(config)
+    //     .then((res) => {
+    //       refreshPas();
+    //       document.getElementsByClassName("form-register")[0].reset();
+    //       document.getElementsByClassName(
+    //         "div-prof-add-homework"
+    //       )[0].style.display = "none";
+    //       document.getElementById("naziv_jezika").value = "";
+    //       document.getElementById("nivo").value = "";
+    //       handleOpen();
+    //       setTimeout(function () {
+    //         handleClose();
+    //       }, 1000);
+    //     })
+    //     .catch(() => console.log(e));
+    // }
+    function showAddPas() {
+      if (
+        document.getElementById("modalDodavanjePsa").style.display == "block"
+          
+      ) {
+        document.getElementById(
+          "modalDodavanjePsa"
+        ).style.display = "none";
+      } else {
+        document.getElementById(
+          "modalDodavanjePsa"
+        ).style.display = "block";
+      }
+    }
 
   return (
       <>
@@ -41,10 +126,12 @@ function AdminPage() {
   className="btn"
   data-toggle="modal"
   data-target="#modalDodavanjePsa"
-  onClick={() => setModalVisible(true)}
+  onClick={showAddPas}
+ // onClick={showAddPas}
 >
   Dodaj psa
 </button>
+
 
               
             </li>

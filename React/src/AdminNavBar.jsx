@@ -61,6 +61,7 @@ function AdminNavBar({cartNum}) {
 
 
                 <Link to="/admin" style={{ marginLeft: 20 }}>Admin</Link>
+                {/* <Link to="/breeds" style={{ marginLeft: 30 }}>Istraži rase</Link> */}
                 <div className="div-time-api">
                           <p className="txt-time-api"></p>
                         </div>

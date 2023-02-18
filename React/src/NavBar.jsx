@@ -68,7 +68,7 @@ function NavBar({cartNum}) {
                 <div className="cart-num">{cartNum}</div>
             </Link>
                 <Link to="/contact" style={{ marginLeft: 20 }}>Kontakt</Link>
-                
+                <Link to="/breeds" style={{ marginLeft: 30 }}>Istraži rase</Link>
                 <div className="div-time-api">
                           <p className="txt-time-api"></p>
                         </div>
