@@ -124,8 +124,8 @@ function AdminPage() {
               <button
   id="btn-dodaj-psa"
   className="btn"
-  data-toggle="modal"
-  data-target="#modalDodavanjePsa"
+  data-bs-toggle="modal"
+  data-bs-target="#modalDodavanjePsa"
   onClick={showAddPas}
  // onClick={showAddPas}
 >
@@ -583,12 +583,7 @@ function AdminPage() {
   </tbody>
               </table>
               <>
-                  {/* <div className="modal fade" id="modalDodavanjePsa" role="dialog"> */}
-                  <div
-  className={`modal fade${modalVisible ? " show" : ""}`}
-  id="modalDodavanjePsa"
-  role="dialog"
->
+                   <div className="modal" id="modalDodavanjePsa" role="dialog"> 
     <div className="modal-dialog">
       {/*Sadrzaj modala*/}
       <div className="modal-content" style={{ border: "4px solid green" }}>
@@ -680,7 +675,7 @@ function AdminPage() {
       </div>
     </div>
   </div>
-  <div className="modal fade" id="modalDodavanjeUdomitelja" role="dialog">
+  <div className="modal" id="modalDodavanjeUdomitelja" role="dialog">
     <div className="modal-dialog">
       {/*Sadrzaj modala*/}
       <div className="modal-content" style={{ border: "4px solid green" }}>
@@ -772,7 +767,7 @@ function AdminPage() {
       </div>
     </div>
   </div>
-  <div className="modal fade" id="modalDodavanjeUgovora" role="dialog">
+  <div className="modal" id="modalDodavanjeUgovora" role="dialog">
     <div className="modal-dialog">
       {/*Sadrzaj modala*/}
       <div className="modal-content" style={{ border: "4px solid green" }}>
@@ -883,7 +878,7 @@ function AdminPage() {
       </div>
     </div>
   </div>
-  <div className="modal fade" id="modalIzmenaUgovora" role="dialog">
+  <div className="modal" id="modalIzmenaUgovora" role="dialog">
     <div className="modal-dialog">
       {/* Modal sadrzaj*/}
       <div className="modal-content">
