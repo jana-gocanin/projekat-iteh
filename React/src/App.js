@@ -44,7 +44,7 @@ function App()  {
 
 
 
-        <Route path="/cart" element={isAdmin ? (
+        <Route path="/cart" element={(isAdmin==1) ? (
     <>
       <AdminNavBar />
       <AdminPage />
@@ -58,7 +58,7 @@ function App()  {
 
 
 
-        <Route path="/contact" element={isAdmin ? (
+        <Route path="/contact" element={(isAdmin==1) ? (
     <>
       <AdminNavBar />
       <AdminPage />
@@ -67,7 +67,7 @@ function App()  {
 <><NavBar cartNum={cartNum} /> <div id="map-container" style={{display: 'flex', justifyContent: 'center'}}><Mapa /></div> <ContactForm /></>
     
   )}  />
-        <Route path="/admin"  element={isAdmin ? (
+        <Route path="/admin"  element={(isAdmin==1) ? (
     <>
       <AdminNavBar />
       <AdminPage />
@@ -77,7 +77,12 @@ function App()  {
       <NavBar cartNum={cartNum} />
       <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} />
     </> )} />
-        <Route path="/breeds" element={<><NavBar cartNum={cartNum} /><DogBreedsCombo/></>} />
+        <Route path="/breeds" element={(isAdmin==1) ? (
+    <>
+      <AdminNavBar />
+      <AdminPage />
+    </>
+  ) : (<><NavBar cartNum={cartNum} /><DogBreedsCombo/></>)} />
       </Routes>
 
     </BrowserRouter>
