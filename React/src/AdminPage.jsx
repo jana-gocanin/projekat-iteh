@@ -90,6 +90,10 @@ function AdminPage() {
       }
     }
 
+    function closeModal() {
+        document.getElementById("modalDodavanjePsa").style.display = "none";
+      }
+
   return (
       <>
           <div className='container'>
@@ -668,6 +672,7 @@ function AdminPage() {
               border: "1px solid white"
             }}
             data-dismiss="modal"
+            onClick={closeModal}
           >
             Zatvori
           </button>
