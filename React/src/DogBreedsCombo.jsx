@@ -33,7 +33,8 @@ function DogBreedsCombo() {
   
     return (
       <div>
-        <label>
+        <label id="dog-label" style={{
+          position: 'relative', left:'37%'}}>
           Select a dog breed:
           <select value={selectedBreed} onChange={handleBreedChange}>
             <option value="">--Please select a breed--</option>

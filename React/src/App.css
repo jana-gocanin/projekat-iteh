@@ -568,11 +568,16 @@ top: -20px;
   margin: auto;
   width: 50%;
   padding: 10px;
+  position: relative;
+  top: 5vw;
 } 
 .dogBreed-body{
   margin: 10px;
 }
-
+.dog-label{
+  position: relative;
+  left: 37%;
+}
 
 .map-container{
   display: flex;
