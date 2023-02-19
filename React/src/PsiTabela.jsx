@@ -1,12 +1,81 @@
 import React from 'react'
+import axios from 'axios';
+import { useState, useEffect,useRef } from 'react';
+import "datatables.net-dt/css/jquery.dataTables.css";
+import "datatables.net-dt/js/dataTables.dataTables";
+import $ from 'jquery';
+
 
 function PsiTabela() {
+
+    const [data, setData] = useState([]);
+    //const tableRef = useRef(null);
+    $(document).ready( 
+        function () {
+            
+            console.log(data);
+
+            $('#table').DataTable( {
+
+                "bDestroy": true,
+                columnDefs: [{
+                    "defaultContent": "-",
+                    "targets": "_all"
+                  }],
+                data: data,
+                columns: [
+                    { "data": "id" },
+                    { "data": "ime"},
+                    { "data": "boja" },
+                    { "data": "godine" },
+                    { "data": "tezina" },
+                    { "data": "vakcina_id" },
+                    {  "data": "Selektuj",
+                    "render": function (data, type, full, meta) {
+
+                        return '<input type="radio" name="Selektuj" >'; }
+                    }
+                
+                   
+              ]},
+            );
+    
+      
+
+    } ); 
+
+  useEffect(() => {
+    axios.get('pas/getAll')
+      .then(response => {
+        setData(response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+
+
+//   const handleAddData = (newData) => {
+//     axios.post('pas/getAll', newData)
+//       .then(response => {
+//         setData([...data, response.data]);
+//         console.log(response.data);
+//       })
+//       .catch(error => {
+//         console.log(error);
+//       });
+//   };
+    
+
   return (
     <>
     <h1>Psi</h1>
-          <table className="table align-middle mb-0 bg-white">
+          <table id="table" className="table align-middle mb-0 bg-white">
   <thead className="bg-light">
     <tr>
+    <th>Id</th>  
       <th>Ime</th>
       <th>Godine</th>
       <th>Boja</th>
@@ -15,6 +84,22 @@ function PsiTabela() {
       <th>Selektuj</th>
     </tr>
   </thead>
+
+  {/* <tbody>
+  {data.map((pas) => (
+    //console.log(pas.id);
+                    <tr key={pas.id}>
+                        <td>{pas.id}</td>
+                         <td>{pas.ime}</td>
+                        <td>{pas.godine}</td>
+                        <td>{pas.boja}</td>
+                        <td>{pas.tezina}</td>
+                        <td>{pas.vakcina_id}</td>
+                        {/* Add additional table cells as needed */}
+                    {/* </tr> */}
+{/* ))} */}
+
+  {/* </tbody> */} 
   {/* <tbody>
     <tr>
       <td>

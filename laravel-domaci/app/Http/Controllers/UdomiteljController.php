@@ -14,23 +14,22 @@ class UdomiteljController extends Controller
     {
         $udomitelji = Udomitelj::all();
 
-        return UdomiteljJson::collection($udomitelji);
+        return response()->json($udomitelji);
     }
 
     public function add(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'ime'=>'required|string|max:255',
-            'prezime'=>'required|string|max:255',
-            'datum_rodjenja'=>'required|date',
-            'email'=>'required|email'
+        $validator = Validator::make($request->all(), [
+            'ime' => 'required|string|max:255',
+            'prezime' => 'required|string|max:255',
+            'datum_rodjenja' => 'required|date',
+            'email' => 'required|email'
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-        
+
         $requestUdomitelj = $request->only('ime', 'prezime', 'datum_rodjenja', 'email');
         $udomitelj = Udomitelj::create($requestUdomitelj);
 
@@ -52,18 +51,17 @@ class UdomiteljController extends Controller
         return response()->json('Udomitelj je uspesno obrisan');
 
     }
-    
+
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'ime'=>'required|string|max:255',
-            'prezime'=>'required|string|max:255',
-            'datum_rodjenja'=>'required|date',
-            'email'=>'required|email'
+        $validator = Validator::make($request->all(), [
+            'ime' => 'required|string|max:255',
+            'prezime' => 'required|string|max:255',
+            'datum_rodjenja' => 'required|date',
+            'email' => 'required|email'
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
@@ -75,7 +73,7 @@ class UdomiteljController extends Controller
         $udomitelj->email = $request->email;
 
         $udomitelj->save();
-        
+
         return response()->json(['Udomitelj je uspesno azuriran.', new UdomiteljJson($udomitelj)]);
     }
 }

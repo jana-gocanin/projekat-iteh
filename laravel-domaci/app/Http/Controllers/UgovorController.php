@@ -13,7 +13,7 @@ class UgovorController extends Controller
     {
         $ugovori = Ugovor::all();
 
-        return UgovorJson::collection($ugovori);
+        return response()->json($ugovori);
     }
 
     public function add(Request $request)
@@ -48,5 +48,5 @@ class UgovorController extends Controller
         return response()->json('Ugovor je uspesno obrisan');
 
     }
-    
+
 }

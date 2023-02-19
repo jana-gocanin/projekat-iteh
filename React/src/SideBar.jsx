@@ -241,7 +241,7 @@ Dodaj udomitelja
       {/*Sadrzaj modala*/}
       <div className="modal-content" style={{ border: "4px solid green" }}>
         <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal">
+          <button type="button" className="close" data-dismiss="modal"  onClick={closeModal}>
             ×
           </button>
         </div>
@@ -319,7 +319,7 @@ Dodaj udomitelja
           </div>
         </div>
         <div className="modal-footer">
-          <button
+          {/* <button
             type="button"
             className="btn btn-default"
             style={{
@@ -328,10 +328,10 @@ Dodaj udomitelja
               border: "1px solid white"
             }}
             data-dismiss="modal"
-            onClick={closeModal}
+           
           >
             Zatvori
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
@@ -412,7 +412,7 @@ Dodaj udomitelja
           </div>
         </div>
         <div className="modal-footer">
-          <button
+          {/* <button
             type="button"
             className="btn btn-default"
             style={{
@@ -423,7 +423,7 @@ Dodaj udomitelja
             data-dismiss="modal"
           >
             Zatvori
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
@@ -501,7 +501,7 @@ Dodaj udomitelja
           </div>
         </div>
         <div className="modal-footer">
-          <button
+          {/* <button
             type="button"
             className="btn btn-default"
             style={{
@@ -512,7 +512,7 @@ Dodaj udomitelja
             data-dismiss="modal"
           >
             Zatvori
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
@@ -606,13 +606,13 @@ Dodaj udomitelja
           </div>
         </div>
         <div className="modal-footer">
-          <button
+          {/* <button
             type="button"
             className="btn btn-default"
             data-dismiss="modal"
           >
             Zatvori
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

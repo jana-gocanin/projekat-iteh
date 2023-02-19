@@ -13,7 +13,8 @@ class PasController extends Controller
     {
         $psi = Pas::all();
 
-        return PasJson::collection($psi);
+        //return PasJson::collection($psi);
+        return response()->json($psi);
     }
 
     public function add(Request $request)
