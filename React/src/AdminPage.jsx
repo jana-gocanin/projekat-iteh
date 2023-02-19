@@ -2,28 +2,11 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Modal from "@mui/material/Modal";
 
-const style = {
-  color: "white",
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "#76c893",
-  borderStyle: "none",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: 10 + "px",
-};
+
+
 function AdminPage() {
-  
-    const [modalVisible, setModalVisible] = useState(false);
     const [PasList, setPasList] = useState();
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const [userData, setUserData] = useState({
       ime: "",
       godine: "",
@@ -186,7 +169,6 @@ function closeModalUgovor() {
   data-bs-toggle="modal"
   data-bs-target="#modalDodavanjePsa"
   onClick={showAddPas}
- // onClick={showAddPas}
 >
   Dodaj psa
 </button>
@@ -907,40 +889,18 @@ Dodaj udomitelja
                   </div>
                   <div className="form-group">
                     <select name="pas_id">
-                      {/*?php if (!empty($psi)) {
-                                      foreach ($neudomljeniPsiArray as $pas) {
-                                              ?*/}
+                     
                       <option value="<?php echo $pas['id'] ?>">
-                        {/*?php echo $pas['ime'] ?*/}[
-                        {/*?php echo $pas['id'] ?*/}]
                       </option>
-                      {/*?php
-                                          }
-                                      } else {
-                                      ?*/}
                       <option value="null">Nema psa</option>
-                      {/*?php
-                                      }
-                                      ?*/}
                     </select>
                   </div>
                   <div className="form-group">
                     <select name="udomitelj_id">
-                      {/*?php if (!empty($udomitelji)) {
-                                          foreach ($udomiteljiArray as $udomitelj) {
-                                              ?*/}
                       <option value="<?php echo $udomitelj['id'] ?>">
-                        {/*?php echo $udomitelj['ime'] ?*/}[
-                        {/*?php echo $udomitelj['id'] ?*/}]
                       </option>
-                      {/*?php
-                                          }
-                                      } else {
-                                          ?*/}
+                    
                       <option value="null">Nema udomitelja</option>
-                      {/*?php
-                                      }
-                                      ?*/}
                     </select>
                   </div>
                   <div className="form-group">
