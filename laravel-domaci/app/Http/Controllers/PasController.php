@@ -25,7 +25,7 @@ class PasController extends Controller
             'godine' => 'required',
             'boja' => 'required|string|max:50',
             'tezina' => 'required',
-            'vakcina_id' => 'required'
+            //  'vakcina_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -35,7 +35,7 @@ class PasController extends Controller
         $requestPas = $request->only('ime', 'godine', 'boja', 'tezina', 'vakcina_id');
         $pas = Pas::create($requestPas);
 
-        return response()->json(['Pas je uspesno kreiran.', new PasJson($pas)]);
+        return response()->json(['message' => 'Pas je uspesno kreiran.', 'status' => 200, new PasJson($pas)]);
     }
 
     public function getById($id)

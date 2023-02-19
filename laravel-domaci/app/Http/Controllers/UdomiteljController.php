@@ -33,7 +33,7 @@ class UdomiteljController extends Controller
         $requestUdomitelj = $request->only('ime', 'prezime', 'datum_rodjenja', 'email');
         $udomitelj = Udomitelj::create($requestUdomitelj);
 
-        return new UdomiteljJson($udomitelj);
+        return response()->json(['message' => 'Udomitelj je uspesno kreiran.', 'status' => 200, new UdomiteljJson($udomitelj)]);
     }
 
     public function getById($id)

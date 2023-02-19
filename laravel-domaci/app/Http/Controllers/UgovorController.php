@@ -30,7 +30,7 @@ class UgovorController extends Controller
 
         $ugovor = Ugovor::create($requestUgovor);
 
-        return new UgovorJson($ugovor);
+        return response()->json(['message' => 'Ugovor je uspesno kreiran.', 'status' => 200, new UgovorJson($ugovor)]);
     }
 
     public function getById($id)

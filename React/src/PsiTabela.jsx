@@ -6,9 +6,9 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import $ from 'jquery';
 
 
-function PsiTabela() {
+function PsiTabela({data, setData}) {
 
-    const [data, setData] = useState([]);
+   
     //const tableRef = useRef(null);
     $(document).ready( 
         function () {

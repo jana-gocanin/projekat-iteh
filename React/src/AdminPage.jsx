@@ -3,16 +3,17 @@ import PsiTabela from './PsiTabela'
 import SideBar from './SideBar'
 import UdomiteljiTabela from './UdomiteljiTabela'
 import UgovoriTabela from './UgovoriTabela'
-
+import { useState } from 'react'
 
 
 
 function AdminPage() {
+  const [data, setData] = useState([]);
   return (
    <>
    <div className='container'>
-<SideBar />
-<PsiTabela />
+<SideBar  data={data} setData={setData}/>
+<PsiTabela data={data} setData={setData} />
 <UdomiteljiTabela />
 <UgovoriTabela />
    </div>
