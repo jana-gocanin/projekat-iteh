@@ -1,4 +1,6 @@
 import React from 'react'
+import axios from 'axios'
+import { useState, useEffect } from 'react';
 
 function ModalUgovor({closeModalUgovor}) {
 
@@ -11,11 +13,78 @@ function ModalUgovor({closeModalUgovor}) {
    
   });
 
+  const [udomitelj, setUdomitelj] = useState({
+    id: '',
+    potpisano:'',
+    datum_potpisa:'',
+    udomitelj_id: '',
+    pas_id: '',
+    udomitelji: [] 
+  });
+  const [pas, setPas] = useState({
+    id: '',
+        ime: '',
+        godine: '',
+        boja: '',
+        tezina: '',
+        vakcina_id: '',
+        psi: [] 
+  });
+
+  useEffect(() => {
+    const fetchPsi = async () => {
+      const response = await axios.get('pas/getAll');
+      setPas(prevState => ({
+        ...prevState,
+        psi: response.data
+      }));
+    };
+  
+    fetchPsi();
+  }, []);
+
+  useEffect(() => {
+    const fetchUdomitelji = async () => {
+      const response = await axios.get('udomitelj/getAll');
+      setUdomitelj(prevState => ({
+        ...prevState,
+        udomitelji: response.data
+      }));
+    };
+  
+    fetchUdomitelji();
+  }, []);
+  
+
   const handleInput = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
+  };
+  const handleCheck = (e) => {
+    const { name, value, type, checked } = e.target;
+    const newValue = type === 'checkbox' ? checked : value;
+    setState((prevState) => ({
+      ...prevState,
+      potpisano: newValue,
+    }));
+  };
+
+  const handleUdomiteljChange = (event) => {
+    const udomiteljId = event.target.value;
+    setState((prevState) => ({
+      ...prevState,
+      udomitelj_id: udomiteljId,
+    }));
+  };
+
+  const handlePasChange = (event) => {
+    const pasId = event.target.value;
+    setState((prevState) => ({
+      ...prevState,
+      pas_id: pasId,
+    }));
   };
 
   function refresh() {
@@ -33,26 +102,21 @@ function ModalUgovor({closeModalUgovor}) {
 
   const saveUgovor = async (e) => {
     e.preventDefault();
-    // const res = await axios.post('pas/add', state);
-    // console.log(res.data);
-    // if (res.data.success===200) {
-    //   console.log(res.data.message);
-    //   setState({
-    //     id: '',
-    //     ime: '',
-    //     godine: '',
-    //     boja: '',
-    //     tezina: '',
-    //     vakcina_id: '',
-    //   });
-    // }
+    const data = {
+      id: state.id,
+      potpisano: state.potpisano ? 1 : 0,
+      datum_potpisa: state.datum_potpisa,
+      udomitelj_id: state.udomitelj_id,
+      pas_id: state.pas_id,
+    };
     var config = {
         method: "post",
         url: "ugovor/add",
         headers: {
           Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
         },
-        data: state,
+       // data: state,
+       data:data
       };
       axios(config)
       .then((res) => {
@@ -64,8 +128,8 @@ function ModalUgovor({closeModalUgovor}) {
             id: '',
             potpisano:'',
             datum_potpisa:'',
-            udomitelj_id: '',
-            pas_id: ''
+             udomitelj_id: '',
+             pas_id: ''
           });
         }
       })
@@ -100,9 +164,9 @@ function ModalUgovor({closeModalUgovor}) {
                       className="form-control"
                       placeholder="Potpisano *"
                     
-                      defaultChecked=""
-                      onChange={handleInput}
-                      value={state.potpisano}
+                      defaultChecked={state.potpisano}
+                      onChange={handleCheck}
+                      //value={state.potpisano}
                     />
                   </div>
                   <div className="form-group">
@@ -117,17 +181,29 @@ function ModalUgovor({closeModalUgovor}) {
                     />
                   </div>
                   <div className="form-group">
-                    <select name="pas_id">
+                    <select name="pas_id"  onChange={handlePasChange}>
+                    {pas.psi.map((pas) => (
+    <option key={pas.id} value={pas.id}>
+      {pas.ime} 
+    </option>
+
+  ))}
+  
                      
                     
-                      <option value="null">Nema psa</option>
+                      {/* <option value="null">Nema psa</option> */}
                     </select>
                   </div>
                   <div className="form-group">
-                    <select name="udomitelj_id">
-                     
+                    <select name="udomitelj_id" onChange={handleUdomiteljChange}>
+                    {udomitelj.udomitelji.map((udomitelj) => (
+    <option key={udomitelj.id} value={udomitelj.id}>
+      {udomitelj.ime} {udomitelj.prezime}
+    </option>
+  ))}
                     
-                      <option value="null">Nema udomitelja</option>
+                 
+                      {/* <option value="null">Nema udomitelja</option> */}
                     </select>
                   </div>
                   <div className="form-group">

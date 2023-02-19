@@ -25,6 +25,7 @@ class PasController extends Controller
             'godine' => 'required',
             'boja' => 'required|string|max:50',
             'tezina' => 'required',
+
             //  'vakcina_id' => 'required'
         ]);
 

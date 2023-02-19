@@ -14,7 +14,8 @@ class Pas extends Model
         'godine',
         'boja',
         'tezina',
-        'vakcina_id'
+        'vakcina_id',
+        'img'
     ];
 
     public function ugovor()
