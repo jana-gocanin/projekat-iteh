@@ -5,48 +5,47 @@ import "datatables.net-dt/css/jquery.dataTables.css";
 import "datatables.net-dt/js/dataTables.dataTables";
 import $ from 'jquery';
 
-function UdomiteljiTabela() {
+function UdomiteljiTabela({udomitelj, setUdomitelj}) {
     
-    const [data, setData] = useState([]);
+  
+    //const [data, setData] = useState([]);
     //const tableRef = useRef(null);
-    $(document).ready( 
-        function () {
-            
-            console.log(data);
+  useEffect(() => {
+    $('#tableUdomitelj').DataTable({
 
-            $('#tableUdomitelj').DataTable( {
-
-                "bDestroy": true,
-                columnDefs: [{
-                    "defaultContent": "-",
-                    "targets": "_all"
-                  }],
-                data: data,
-                columns: [
-                    { "data": "id" },
-                    { "data": "ime"},
-                    { "data": "prezime" },
-                    { "data": "datum_rodjenja" },
-                    { "data": "email" },
+      "bDestroy": true,
+      columnDefs: [{
+        "defaultContent": "-",
+        "targets": "_all"
+      }], buttons: [
+        'copy', 'excel', 'pdf'
+      ],
+      data: udomitelj,
+      columns: [
+        { "data": "id" },
+        { "data": "ime" },
+        { "data": "prezime" },
+        { "data": "datum_rodjenja" },
+        { "data": "email" },
                     
-                    {  "data": "Selektuj",
-                    "render": function (data, type, full, meta) {
-
-                        return '<input type="radio" name="Selektuj" >'; }
-                    }
+        { "data": null, defaultContent: "<button id='deleteUdomitelj' class='btnDelete'>delete</button>", targets: -1 }
                 
                    
-              ]},
-            );
-    
+      ]
+    },
+    ); $('#tableUdomitelj .btnDelete').on('click', function () {
+      console.log($('#tableUdomitelj').DataTable().row($(this).closest('tr')));
+      let z = $('#tableUdomitelj').DataTable().row($(this).closest('tr')).data();
+      console.log(z);
+      setUdomitelj(z);
       
-
-    } );
-
+    });
+          
+  }, [udomitelj]);
     useEffect(() => {
       axios.get('udomitelj/getAll')
         .then(response => {
-          setData(response.data);
+          setUdomitelj(response.data);
           console.log(response.data);
         })
         .catch(error => {

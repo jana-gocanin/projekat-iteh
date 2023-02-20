@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 
-function ModalUgovor({closeModalUgovor}) {
+function ModalUgovor({ugovor, setUgovor, closeModalUgovor}) {
 
   const [state, setState] = useState({
    id: '',
@@ -87,18 +87,18 @@ function ModalUgovor({closeModalUgovor}) {
     }));
   };
 
-  function refresh() {
-    var config = {
-      method: "get",
-      url: "ugovor/getAll",
-      headers: {
-        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
-      },
-    };
-    axios(config).then((res) => {
-      setState(res.data);
-    });
-  }
+  // function refresh() {
+  //   var config = {
+  //     method: "get",
+  //     url: "ugovor/getAll",
+  //     headers: {
+  //       Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+  //     },
+  //   };
+  //   axios(config).then((res) => {
+  //     setState(res.data);
+  //   });
+  // }
 
   const saveUgovor = async (e) => {
     e.preventDefault();
@@ -121,8 +121,7 @@ function ModalUgovor({closeModalUgovor}) {
       axios(config)
       .then((res) => {
         console.log(res.data);
-        refresh();
-        if (res.data.success===200) {
+        if (res.data.status===200) {
            console.log(res.data.message);
            setState({
             id: '',
@@ -130,7 +129,9 @@ function ModalUgovor({closeModalUgovor}) {
             datum_potpisa:'',
              udomitelj_id: '',
              pas_id: ''
-          });
+           });
+          setUgovor(res.data.response.original);
+          closeModalUgovor();
         }
       })
     
@@ -139,7 +140,7 @@ function ModalUgovor({closeModalUgovor}) {
   };
   return (
    <>
-    <div className="modal" id="modalDodavanjeUgovora" role="dialog">
+    <div className="modal" id="modalDodavanjeUgovora" role="dialog" style={{display:'block'}}>
     <div className="modal-dialog">
       {/*Sadrzaj modala*/}
       <div className="modal-content" style={{ border: "4px solid green" }}>

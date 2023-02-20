@@ -6,13 +6,10 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import $ from 'jquery';
 
 
-function UgovoriTabela() {
-    const [data, setData] = useState([]);
+function UgovoriTabela({ugovor, setUgovor}) {
+    //const [data, setData] = useState([]);
     //const tableRef = useRef(null);
-    $(document).ready( 
-        function () {
-            
-            console.log(data);
+    useEffect(() => {
 
             $('#tableUgovor').DataTable( {
 
@@ -21,31 +18,30 @@ function UgovoriTabela() {
                     "defaultContent": "-",
                     "targets": "_all"
                   }],
-                data: data,
+                data: ugovor,
                 columns: [
                     { "data": "id" },
                     { "data": "potpisano"},
                     { "data": "datum_potpisa" },
                     { "data": "udomitelj_id" },
                     { "data": "pas_id" },
-                    {  "data": "Selektuj",
-                    "render": function (data, type, full, meta) {
-
-                        return '<input type="radio" name="Selektuj" >'; }
-                    }
-                
-                   
-              ]},
-            );
-    
-      
-
-    } );
+                    { "data": null, defaultContent: "<button id='deleteUgovor' class='btnDelete'>delete</button>", targets: -1 }
+                  ]
+                },
+                ); $('#tableUgovor .btnDelete').on('click', function () {
+                  console.log($('#tableUgovor').DataTable().row($(this).closest('tr')));
+                  let z = $('#tableUgovor').DataTable().row($(this).closest('tr')).data();
+                  console.log(z);
+                  setUgovor(z);
+                  
+                });
+                      
+              }, [ugovor]);
 
     useEffect(() => {
       axios.get('ugovor/getAll')
         .then(response => {
-          setData(response.data);
+          setUgovor(response.data);
           console.log(response.data);
         })
         .catch(error => {

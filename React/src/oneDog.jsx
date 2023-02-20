@@ -11,7 +11,7 @@ const OneDog = ({dog, onAdd, onRemove}) => {
       <div className="card-body">
         <h3 className="card-title">{dog.ime}</h3>
         <p className="card-text">
-          {dog.description}   
+          {dog.godine}   
         </p>
         <h3 className="card-title">Klikom na dugme + doniraš 100 rsd za psa po imenu {dog.title}!</h3>
         <div className='card-btn-wrapper'>

@@ -1,20 +1,30 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import axios from 'axios'
 import { useState } from 'react';
-import $ from 'jquery'
+import $ from 'jquery';
 
-function ModalPas({closeModal, closeModalUpdatePas, setData}) {
+function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
+
 
   
     const [state, setState] = useState({
-        id: '',
-        ime: '',
-        godine: '',
-        boja: '',
-        tezina: '',
-        vakcina_id: '',
+        id: pas?.id||'',
+        ime: pas?.ime||'',
+        godine: pas?.godine||'',
+        boja: pas?.boja||'',
+        tezina: pas?.tezina||'',
+        vakcina_id: pas?.vakcina_id||'',
       });
-    
+  useEffect(() => {
+    setState({
+      id: pas?.id || '',
+      ime: pas?.ime || '',
+      godine: pas?.godine || '',
+      boja: pas?.boja || '',
+      tezina: pas?.tezina || '',
+      vakcina_id: pas?.vakcina_id || '',
+    });
+  }, [pas]);
       const handleInput = (e) => {
         setState({
           ...state,
@@ -37,19 +47,6 @@ function ModalPas({closeModal, closeModalUpdatePas, setData}) {
 
       const savePas = async (e) => {
         e.preventDefault();
-        // const res = await axios.post('pas/add', state);
-        // console.log(res.data);
-        // if (res.data.success===200) {
-        //   console.log(res.data.message);
-        //   setState({
-        //     id: '',
-        //     ime: '',
-        //     godine: '',
-        //     boja: '',
-        //     tezina: '',
-        //     vakcina_id: '',
-        //   });
-        // }
         var config = {
             method: "post",
             url: "pas/add",
@@ -58,28 +55,23 @@ function ModalPas({closeModal, closeModalUpdatePas, setData}) {
             },
             data: state,
           };
-          axios(config)
-          .then((res) => {
-            console.log(res.data);
-            
-            if (res.data.success===200) {
-               console.log(res.data.message);
-               setState({
-                id: '',
-                ime: '',
-                godine: '',
-                 boja: '',
-                 tezina: '',
-                 vakcina_id: '',
-               });
-              setData(res.data.response.original);
-              $('#table').DataTable().ajax.reload();
-            }
-          })
-        
-      
-     
-      };
+    const res = await axios(config);
+        if (res.data.status===200) {
+            console.log(res.data.message);
+            setState({
+            id: '',
+            ime: '',
+            godine: '',
+              boja: '',
+              tezina: '',
+              vakcina_id: '',
+            });
+          setData(res.data.response.original);
+          closeModal();
+          setPas(null);
+          //$('#table').DataTable().ajax.reload();
+        }
+    };
 
   return (
     <>

@@ -106,6 +106,28 @@ h1{
   border-radius: 3px;
   border-width: 0px;
 }
+.btnEdit {
+  background-color: rgb(237, 100, 212);
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 3px;
+  border-radius: 3px;
+  border-width: 0px;
+}
+.btnDelete {
+  background-color: rgb(237, 100, 212);
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 3px;
+  border-radius: 3px;
+  border-width: 0px;
+}
 
 a {
   color: black;

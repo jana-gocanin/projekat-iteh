@@ -6,39 +6,49 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import $ from 'jquery';
 
 
-function PsiTabela({data, setData}) {
+function PsiTabela({ data, setData, showAddPas, pas, setPas }) {
+
+
+  
 
   useEffect(() => {
-    $('#table').DataTable( {
+    $('#table').DataTable({
 
       "bDestroy": true,
       columnDefs: [{
-          "defaultContent": "-",
-          "targets": "_all"
-        }],
+        "defaultContent": "-",
+        "targets": "_all"
+      }], buttons: [
+        'copy', 'excel', 'pdf'
+      ],
       data: data,
       columns: [
-          { "data": "id" },
-          { "data": "ime"},
-          { "data": "boja" },
-          { "data": "godine" },
-          { "data": "tezina" },
-          { "data": "vakcina_id" },
-          {  "data": "Selektuj",
-          "render": function (data, type, full, meta) {
-
-              return '<input type="radio" name="Selektuj" >'; }
-          }
+        { "data": "id" },
+        { "data": "ime" },
+        { "data": "boja" },
+        { "data": "godine" },
+        { "data": "tezina" },
+        { "data": "vakcina_id" },
+        
+        { "data": null, defaultContent: "<button id='edit' class='btnEdit' variant='primary'   >edit</button> <button class='btnDelete'>delete</button>", targets: -1 }
+        
+      ]
+    }
       
-         
-    ]},
+     
   );
+  $('#table .btnEdit').on('click', function () {
+    console.log($('#table').DataTable().row($(this).closest('tr')));
+    let z = $('#table').DataTable().row($(this).closest('tr')).data();
+  console.log(z);
+    setPas(z);
+    showAddPas();
+  });
 
   }, [data])
    
     
- 
-
+  
 
 
 //   const handleAddData = (newData) => {
@@ -193,8 +203,6 @@ function PsiTabela({data, setData}) {
     </tr>
   </tbody> */}
       </table>
-      
-      {data.map(dog => <div>{dog.ime }</div>)}
     </>
   )
 }

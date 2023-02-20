@@ -4,12 +4,9 @@ import ModalUdomitelj from './ModalUdomitelj';
 import ModalUgovor from './ModalUgovor';
 import { useState } from 'react';
 
-function SideBar({ data, setData }) {
+function SideBar({ data, setData, showAddPas, showAddUdomitelj, showAddUgovor, setPas }) {
   
-  const [showModal, setshowModal] = useState();
-    function showAddPas() {
-      setshowModal(!showModal);
-      }
+  
   
   function showUpdatePas(){
     if (
@@ -26,52 +23,52 @@ function SideBar({ data, setData }) {
     }
   }
   
-  function showAddUdomitelj(){
-    if (
-      document.getElementById("modalDodavanjeUdomitelja").style.display == "block"
+  // function showAddUdomitelj(){
+  //   if (
+  //     document.getElementById("modalDodavanjeUdomitelja").style.display == "block"
         
-    ) {
-      document.getElementById(
-        "modalDodavanjeUdomitelja"
-      ).style.display = "none";
-    } else {
-      document.getElementById(
-        "modalDodavanjeUdomitelja"
-      ).style.display = "block";
-    }
-  }
+  //   ) {
+  //     document.getElementById(
+  //       "modalDodavanjeUdomitelja"
+  //     ).style.display = "none";
+  //   } else {
+  //     document.getElementById(
+  //       "modalDodavanjeUdomitelja"
+  //     ).style.display = "block";
+  //   }
+  // }
   
-  function showAddUgovor() {
-    if (
-      document.getElementById("modalDodavanjeUgovora").style.display == "block"
+  // function showAddUgovor() {
+  //   if (
+  //     document.getElementById("modalDodavanjeUgovora").style.display == "block"
         
-    ) {
-      document.getElementById(
-        "modalDodavanjeUgovora"
-      ).style.display = "none";
-    } else {
-      document.getElementById(
-        "modalDodavanjeUgovora"
-      ).style.display = "block";
-    }
-  }
+  //   ) {
+  //     document.getElementById(
+  //       "modalDodavanjeUgovora"
+  //     ).style.display = "none";
+  //   } else {
+  //     document.getElementById(
+  //       "modalDodavanjeUgovora"
+  //     ).style.display = "block";
+  //   }
+  // }
   
 
 
-  function closeModalUgovor() {
-    document.getElementById("modalDodavanjeUgovora").style.display = "none";
-  }
+  // function closeModalUgovor() {
+  //   document.getElementById("modalDodavanjeUgovora").style.display = "none";
+  // }
   
-      function closeModal() {
-          document.getElementById("modalDodavanjePsa").style.display = "none";
-        }
+  //   function closeModal() {
+  //       document.getElementById("modalDodavanjePsa").style.display = "none";
+  //     }
   
-        function closeModalUpdatePas() {
-          document.getElementById("modalIzmenaPsa").style.display = "none";
-        }
-        function closeModalDodavanjeUdomitelja(){
-          document.getElementById("modalDodavanjeUdomitelja").style.display = "none";
-        }
+  //     function closeModalUpdatePas() {
+  //       document.getElementById("modalIzmenaPsa").style.display = "none";
+  //     }
+  //     function closeModalDodavanjeUdomitelja(){
+  //         document.getElementById("modalDodavanjeUdomitelja").style.display = "none";
+  //       }
   return (
 <>
 <header>
@@ -102,11 +99,14 @@ function SideBar({ data, setData }) {
             <li className="list-group-item py-1">
               
               <button
-  id="btn-dodaj-psa"
-  className="btn"
-  data-bs-toggle="modal"
-  data-bs-target="#modalDodavanjePsa"
-  onClick={showAddPas}
+                    id="btn-dodaj-psa"
+                    className="btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalDodavanjePsa"
+                    onClick={() => {
+                      setPas(null);
+                      showAddPas();
+                    }}
 >
   Dodaj psa
 </button>
@@ -114,7 +114,7 @@ function SideBar({ data, setData }) {
 
               
             </li>
-            <li className="list-group-item py-1">
+            {/* <li className="list-group-item py-1">
             <button
   id="btn-izmeni-psa"
   className="btn"
@@ -125,8 +125,8 @@ function SideBar({ data, setData }) {
 >
   Izmeni psa
 </button>
-            </li>
-            <li className="list-group-item py-1">
+            </li> */}
+            {/* <li className="list-group-item py-1">
             <button
   id="btn-obrisi-psa"
   className="btn"
@@ -135,7 +135,7 @@ function SideBar({ data, setData }) {
   Obrisi psa
 </button>
             </li>
-            
+             */}
           </ul>
           {/* Collapse 1 */}
           {/* Collapse 2 */}
@@ -167,14 +167,14 @@ function SideBar({ data, setData }) {
 Dodaj udomitelja
 </button>
             </li>
-            <li className="list-group-item py-1">
+            {/* <li className="list-group-item py-1">
             <button
   id="btn-obrisi-udomitelja"
   className="btn"
 >
   Obrisi udomitelja
 </button>
-            </li>
+            </li> */}
             
           </ul>
           {/* Collapse 2 */}
@@ -207,7 +207,7 @@ Dodaj udomitelja
   Dodaj ugovor
 </button>
             </li>
-            <li className="list-group-item py-1">
+            {/* <li className="list-group-item py-1">
             <button
   id="btn-obrisi-ugovor"
   className="btn"
@@ -216,7 +216,7 @@ Dodaj udomitelja
 >
   Obrisi ugovor
 </button>
-            </li>
+            </li> */}
           </ul>
           {/* Collapse 3 */}
         </div>
@@ -232,7 +232,7 @@ Dodaj udomitelja
   <main style={{ marginTop: 58 }}>
     <div className="container pt-4" />
       </main>
-      {showModal &&
+      {/* {showModal &&
         <ModalPas closeModal={showAddPas} closeModalUpdatePas={showAddPas}
         
          setData={(a) => {
@@ -241,7 +241,7 @@ Dodaj udomitelja
         } />
       }
   <ModalUdomitelj closeModalDodavanjeUdomitelja={closeModalDodavanjeUdomitelja} />
- <ModalUgovor closeModalUgovor={closeModalUgovor} />
+ <ModalUgovor closeModalUgovor={closeModalUgovor} /> */}
   
 </>
 

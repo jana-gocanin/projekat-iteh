@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import { useState } from 'react';
+import $ from 'jquery';
 
-function ModalUdomitelj({closeModalDodavanjeUdomitelja}) {
+
+function ModalUdomitelj({setUdomitelj, udomitelj, closeModalDodavanjeUdomitelja }) {
+  //const [udomitelji, setUdomitelji] = useState();
   const [state, setState] = useState({
     id: '',
     ime: '',
@@ -19,34 +22,21 @@ function ModalUdomitelj({closeModalDodavanjeUdomitelja}) {
     });
   };
 
-  function refresh() {
-    var config = {
-      method: "get",
-      url: "udomitelj/getAll",
-      headers: {
-        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
-      },
-    };
-    axios(config).then((res) => {
-      setState(res.data);
-    });
-  }
+  // function refresh() {
+  //   var config = {
+  //     method: "get",
+  //     url: "udomitelj/getAll",
+  //     headers: {
+  //       Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+  //     },
+  //   };
+  //   axios(config).then((res) => {
+  //     setState(res.data);
+  //   });
+  // }
 
   const saveUdomitelj = async (e) => {
     e.preventDefault();
-    // const res = await axios.post('pas/add', state);
-    // console.log(res.data);
-    // if (res.data.success===200) {
-    //   console.log(res.data.message);
-    //   setState({
-    //     id: '',
-    //     ime: '',
-    //     godine: '',
-    //     boja: '',
-    //     tezina: '',
-    //     vakcina_id: '',
-    //   });
-    // }
     var config = {
         method: "post",
         url: "udomitelj/add",
@@ -55,11 +45,11 @@ function ModalUdomitelj({closeModalDodavanjeUdomitelja}) {
         },
         data: state,
       };
-      axios(config)
-      .then((res) => {
+     // axios(config)
+      const res = await axios(config);
         console.log(res.data);
-        refresh();
-        if (res.data.success===200) {
+        
+        if (res.data.status===200) {
            console.log(res.data.message);
            setState({
             id: '',
@@ -67,16 +57,19 @@ function ModalUdomitelj({closeModalDodavanjeUdomitelja}) {
             prezime: '',
             datum_rodjenja: '',
             email: ''
-          });
+           });
+          setUdomitelj(res.data.response.original);
+          closeModalDodavanjeUdomitelja();
+          //$('#tableUdomitelj').DataTable().ajax.reload();
         }
-      })
+      
     
   
  
   };
   return (
     <>
-    <div className="modal" id="modalDodavanjeUdomitelja" role="dialog">
+    <div className="modal" id="modalDodavanjeUdomitelja" role="dialog" style={{display:'block'}}>
     <div className="modal-dialog">
       {/*Sadrzaj modala*/}
       <div className="modal-content" style={{ border: "4px solid green" }}>
