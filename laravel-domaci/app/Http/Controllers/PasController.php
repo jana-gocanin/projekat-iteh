@@ -36,7 +36,7 @@ class PasController extends Controller
         $requestPas = $request->only('ime', 'godine', 'boja', 'tezina', 'vakcina_id');
         $pas = Pas::create($requestPas);
 
-        return response()->json(['message' => 'Pas je uspesno kreiran.', 'status' => 200, new PasJson($pas)]);
+        return response()->json(['message' => 'Pas je uspesno kreiran.', 'status' => 200, new PasJson($pas), 'response' => $this->getAll()]);
     }
 
     public function getById($id)

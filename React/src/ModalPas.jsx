@@ -1,9 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import { useState } from 'react';
+import $ from 'jquery'
 
-function ModalPas({closeModal, closeModalUpdatePas, data, setData}) {
+function ModalPas({closeModal, closeModalUpdatePas, setData}) {
 
+  
     const [state, setState] = useState({
         id: '',
         ime: '',
@@ -20,18 +22,18 @@ function ModalPas({closeModal, closeModalUpdatePas, data, setData}) {
         });
       };
     
-      function refresh() {
-        var config = {
-          method: "get",
-          url: "pas/getAll",
-          headers: {
-            Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
-          },
-        };
-        axios(config).then((res) => {
-          setState(res.data);
-        });
-      }
+      // function refresh() {
+      //   var config = {
+      //     method: "get",
+      //     url: "pas/getAll",
+      //     headers: {
+      //       Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      //     },
+      //   };
+      //   axios(config).then((res) => {
+      //     setState(res.data);
+      //   });
+      // }
 
       const savePas = async (e) => {
         e.preventDefault();
@@ -59,7 +61,7 @@ function ModalPas({closeModal, closeModalUpdatePas, data, setData}) {
           axios(config)
           .then((res) => {
             console.log(res.data);
-            refresh();
+            
             if (res.data.success===200) {
                console.log(res.data.message);
                setState({
@@ -69,7 +71,9 @@ function ModalPas({closeModal, closeModalUpdatePas, data, setData}) {
                  boja: '',
                  tezina: '',
                  vakcina_id: '',
-              });
+               });
+              setData(res.data.response.original);
+              $('#table').DataTable().ajax.reload();
             }
           })
         
@@ -79,7 +83,7 @@ function ModalPas({closeModal, closeModalUpdatePas, data, setData}) {
 
   return (
     <>
-    <div className="modal" id="modalDodavanjePsa" role="dialog"> 
+    <div className="modal" id="modalDodavanjePsa" role="dialog" style={{display:'block'}}> 
     <div className="modal-dialog">
       {/*Sadrzaj modala*/}
       <div className="modal-content" style={{ border: "4px solid green" }}>

@@ -7,8 +7,8 @@ import { useState } from 'react'
 
 
 
-function AdminPage() {
-  const [data, setData] = useState([]);
+function AdminPage({data, setData}) {
+  
   return (
    <>
    <div className='container'>

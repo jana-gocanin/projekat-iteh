@@ -8,52 +8,36 @@ import $ from 'jquery';
 
 function PsiTabela({data, setData}) {
 
-   
-    //const tableRef = useRef(null);
-    $(document).ready( 
-        function () {
-            
-            console.log(data);
-
-            $('#table').DataTable( {
-
-                "bDestroy": true,
-                columnDefs: [{
-                    "defaultContent": "-",
-                    "targets": "_all"
-                  }],
-                data: data,
-                columns: [
-                    { "data": "id" },
-                    { "data": "ime"},
-                    { "data": "boja" },
-                    { "data": "godine" },
-                    { "data": "tezina" },
-                    { "data": "vakcina_id" },
-                    {  "data": "Selektuj",
-                    "render": function (data, type, full, meta) {
-
-                        return '<input type="radio" name="Selektuj" >'; }
-                    }
-                
-                   
-              ]},
-            );
-    
-      
-
-    } ); 
-
   useEffect(() => {
-    axios.get('pas/getAll')
-      .then(response => {
-        setData(response.data);
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+    $('#table').DataTable( {
+
+      "bDestroy": true,
+      columnDefs: [{
+          "defaultContent": "-",
+          "targets": "_all"
+        }],
+      data: data,
+      columns: [
+          { "data": "id" },
+          { "data": "ime"},
+          { "data": "boja" },
+          { "data": "godine" },
+          { "data": "tezina" },
+          { "data": "vakcina_id" },
+          {  "data": "Selektuj",
+          "render": function (data, type, full, meta) {
+
+              return '<input type="radio" name="Selektuj" >'; }
+          }
+      
+         
+    ]},
+  );
+
+  }, [data])
+   
+    
+ 
 
 
 
@@ -84,6 +68,8 @@ function PsiTabela({data, setData}) {
       <th>Selektuj</th>
     </tr>
   </thead>
+
+        
 
   {/* <tbody>
   {data.map((pas) => (
@@ -206,7 +192,9 @@ function PsiTabela({data, setData}) {
       </td>
     </tr>
   </tbody> */}
-              </table>
+      </table>
+      
+      {data.map(dog => <div>{dog.ime }</div>)}
     </>
   )
 }

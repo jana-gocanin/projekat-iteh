@@ -9,7 +9,7 @@ const OneDog = ({dog, onAdd, onRemove}) => {
     <div className="card" style={design}>
       <img className="card-img-top" src={dog.pic} alt="Neka slika" width="200px" />
       <div className="card-body">
-        <h3 className="card-title">{dog.title}</h3>
+        <h3 className="card-title">{dog.ime}</h3>
         <p className="card-text">
           {dog.description}   
         </p>

@@ -2,21 +2,13 @@ import React from 'react'
 import ModalPas from './ModalPas';
 import ModalUdomitelj from './ModalUdomitelj';
 import ModalUgovor from './ModalUgovor';
+import { useState } from 'react';
 
-function SideBar({data, setData}) {
+function SideBar({ data, setData }) {
+  
+  const [showModal, setshowModal] = useState();
     function showAddPas() {
-        if (
-          document.getElementById("modalDodavanjePsa").style.display == "block"
-            
-        ) {
-          document.getElementById(
-            "modalDodavanjePsa"
-          ).style.display = "none";
-        } else {
-          document.getElementById(
-            "modalDodavanjePsa"
-          ).style.display = "block";
-        }
+      setshowModal(!showModal);
       }
   
   function showUpdatePas(){
@@ -170,7 +162,7 @@ function SideBar({data, setData}) {
   data-bs-toggle="modal"
   data-bs-target="#modalDodavanjeUdomitelja"
   onClick={showAddUdomitelj}
- // onClick={showAddPas}
+ 
 >
 Dodaj udomitelja
 </button>
@@ -239,9 +231,15 @@ Dodaj udomitelja
   {/*Main layout*/}
   <main style={{ marginTop: 58 }}>
     <div className="container pt-4" />
-  </main>
-<ModalPas  closeModal={closeModal} closeModalUpdatePas={closeModalUpdatePas} data={data} setData={setData}/>
-  
+      </main>
+      {showModal &&
+        <ModalPas closeModal={showAddPas} closeModalUpdatePas={showAddPas}
+        
+         setData={(a) => {
+          debugger; setData(a)
+        }
+        } />
+      }
   <ModalUdomitelj closeModalDodavanjeUdomitelja={closeModalDodavanjeUdomitelja} />
  <ModalUgovor closeModalUgovor={closeModalUgovor} />
   

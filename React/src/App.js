@@ -1,6 +1,6 @@
 import './App.css';
 import NavBar from "./NavBar";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Cart from './cart';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ContactForm from './contactForm';
@@ -11,12 +11,32 @@ import AdminPage from './AdminPage';
 import DogBreedsCombo from './DogBreedsCombo';
 import AdminNavBar from './AdminNavBar';
 import Mapa from './mapa';
+import axios from 'axios';
 
 
 function App()  {
   const [cartDogs, setCartDogs] = useState([]);
   const [cartNum, setCartNum] = useState(0);
   const [isAdmin, setIsAdmin] = useState(window.sessionStorage.getItem('isAdmin'));
+  const [isLoggedIn, setIsLoggedIn] = useState(window.sessionStorage.getItem('auth_token'));
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      axios.get('pas/getAll')
+        
+      .then(response => {
+        setData(response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      setIsAdmin(window.sessionStorage.getItem('isAdmin'));
+    }
+  }, [isLoggedIn])
+
+  
   function selektujAdmina(isAdmin) {
     setIsAdmin(isAdmin);
     
@@ -29,15 +49,18 @@ function App()  {
       <Route path="/register" element={<Register />} />
       <Route
   path="/"
-  element={isAdmin ? (
+  element={+isAdmin ? (
     <>
       <AdminNavBar />
-      <AdminPage />
+      <AdminPage data={data} setData={(a) => {
+        debugger; setData(a)
+      }
+      }/>
     </>
   ) : (
     <>
       <NavBar cartNum={cartNum} />
-      <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} />
+      <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData}/>
     </>
   )}
 />
@@ -47,7 +70,7 @@ function App()  {
         <Route path="/cart" element={(isAdmin==1) ? (
     <>
       <AdminNavBar />
-      <AdminPage />
+      <AdminPage data={data} setData={setData}/>
     </>
   ) : (
     <>
@@ -61,7 +84,7 @@ function App()  {
         <Route path="/contact" element={(isAdmin==1) ? (
     <>
       <AdminNavBar />
-      <AdminPage />
+            <AdminPage data={data} setData={setData}/>
     </>
   ) : (
 <><NavBar cartNum={cartNum} /> <div id="map-container" style={{display: 'flex', justifyContent: 'center'}}><Mapa /></div> <ContactForm /></>
@@ -70,17 +93,17 @@ function App()  {
         <Route path="/admin"  element={(isAdmin==1) ? (
     <>
       <AdminNavBar />
-      <AdminPage />
+      <AdminPage data={data} setData={setData}/>
     </>
   ) : (
     <>
       <NavBar cartNum={cartNum} />
-      <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} />
+              <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData} />
     </> )} />
         <Route path="/breeds" element={(isAdmin==1) ? (
     <>
       <AdminNavBar />
-      <AdminPage />
+      <AdminPage data={data} setData={setData}/>
     </>
   ) : (<><NavBar cartNum={cartNum} /><DogBreedsCombo/></>)} />
       </Routes>
