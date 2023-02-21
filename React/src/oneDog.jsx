@@ -10,7 +10,7 @@ const OneDog = ({idKorisnika, data, dog, onAdd, onRemove}) => {
       <img className="card-img-top" src={dog.img} alt="Neka slika" width="200px" />
       <div className="card-body">
         <h3 className="card-title">{dog.ime}</h3>
-        <p className="card-text">
+        <p className="card-text">Godine: 
           {dog.godine}   
         </p>
         <h3 className="card-title">Klikom na dugme + doniraš 100 rsd za psa po imenu {dog.ime}!</h3>

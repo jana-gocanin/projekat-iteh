@@ -35,7 +35,7 @@ function UgovoriTabela({ugovor, setUgovor}) {
                   console.log($('#tableUgovor').DataTable().row($(this).closest('tr')));
                   let z = $('#tableUgovor').DataTable().row($(this).closest('tr')).data();
                   console.log(z);
-                  setUgovor(z);
+                  deleteUgovor(z);
                   
                 });
                       
@@ -51,6 +51,23 @@ function UgovoriTabela({ugovor, setUgovor}) {
           console.log(error);
         });
     }, []);
+
+    const deleteUgovor = async (ugovor) => {
+      var config = {
+          method: "delete",
+          url: "ugovor/delete/"+ugovor.id,
+          headers: {
+            Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+          },
+          
+        };
+    const res = await axios(config);
+      if (res.data.status===200) {
+          console.log(res.data.message);
+      
+        setUgovor(res.data.response.original);
+      }
+    };
 
   return (
    <>

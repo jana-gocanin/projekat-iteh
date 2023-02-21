@@ -37,7 +37,7 @@ function UdomiteljiTabela({udomitelj, setUdomitelj}) {
       console.log($('#tableUdomitelj').DataTable().row($(this).closest('tr')));
       let z = $('#tableUdomitelj').DataTable().row($(this).closest('tr')).data();
       console.log(z);
-      setUdomitelj(z);
+      deleteUdomitelj(z);
       
     });
           
@@ -52,6 +52,23 @@ function UdomiteljiTabela({udomitelj, setUdomitelj}) {
           console.log(error);
         });
     }, []);
+
+    const deleteUdomitelj = async (udomitelj) => {
+      var config = {
+          method: "delete",
+          url: "udomitelj/delete/"+udomitelj.id,
+          headers: {
+            Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+          },
+          
+        };
+    const res = await axios(config);
+      if (res.data.status===200) {
+          console.log(res.data.message);
+      
+        setUdomitelj(res.data.response.original);
+      }
+    };
 
   return (
     <>

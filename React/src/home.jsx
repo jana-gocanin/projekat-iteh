@@ -9,36 +9,27 @@ const Home = ({ idKorisnika, cartDogs, setCartDogs, cartNum, setCartNum, data, s
   
   const [currentPage, setCurrentPage] = useState(1);
   
-  const addToCart = (idKorisnika, id, data) => {
-    setData(data?.map((dog) => {
-      if (dog.id === id) {
-        var config = {
-          method: "post",
-          url: "pas/amount",
-          headers: {
-            Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
-          },
-          data: {
-            id: id,
-            idKorisnika: idKorisnika
-          },
-        }; axios(config).then((res) => { console.log(res.data) })
-        //const res = await axios(config);
-        //dog.amount = dog.amount + 100;
-        //     const a = cartNum + 100;
-        //     setCartNum(a);
-        //     if (dog.amount === 100) {
-        //       updateCart(dog);
-        //     } else {
-        //       refreshCart();
-        //     }
-
-        //     console.log("dog id=", dog.id, "amount=", dog.amount);
-      }
-      //   return dog;
-
+  const addToCart = async (idKorisnika, id, data) => {
+    var config = {
+      method: "post",
+      url: "pas/amount",
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+      data: {
+        id: id,
+        idKorisnika: idKorisnika
+      },
+    };
+    let response = await axios(config); 
+    debugger;
+    if (response.status === 200) {
+      setData(data.map((dog) => {
+        if (dog.id === id) {
+          dog.iznos = response.data.iznos;
+        } return dog;
+      }))
     }
-    ))
 
 
 

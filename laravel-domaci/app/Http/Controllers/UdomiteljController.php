@@ -48,8 +48,7 @@ class UdomiteljController extends Controller
     {
         $udomitelj = Udomitelj::destroy($id);
 
-        return response()->json('Udomitelj je uspesno obrisan');
-
+        return response()->json(['message' => 'Udomitelj je uspesno obrisan.', 'status' => 200, 'response' => $this->getAll()]);
     }
 
     public function update(Request $request, $id)

@@ -56,14 +56,15 @@ class PasController extends Controller
     {
         $pas = Pas::destroy($id);
 
-        return response()->json('Pas je uspesno obrisan');
+        return response()->json(['message' => 'Pas je uspesno obrisan.', 'status' => 200, 'response' => $this->getAll()]);
 
     }
 
     public function getAllUnadopted()
     {
         $psi = Pas::doesntHave('ugovor')->get();
-        return response()->json($psi);
+       return response()->json($psi);
+       //return response()->json(['status' => 200, 'response' => $psi]);
 
     }
 
@@ -93,7 +94,7 @@ class PasController extends Controller
 
         $pas->save();
 
-        return response()->json(['Pas je uspesno azuriran.', new PasJson($pas)]);
+        return response()->json(['message' => 'Pas je uspesno azuriran.', 'status' => 200, new PasJson($pas), 'response' => $this->getAll()]);
     }
 
     public function donation($id){

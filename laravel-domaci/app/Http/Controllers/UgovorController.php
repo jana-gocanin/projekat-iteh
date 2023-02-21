@@ -46,8 +46,7 @@ class UgovorController extends Controller
     {
         $ugovor = Ugovor::destroy($id);
 
-        return response()->json('Ugovor je uspesno obrisan');
-
+        return response()->json(['message' => 'Ugovor je uspesno obrisan.', 'status' => 200, 'response' => $this->getAll()]);
     }
 
     public function join()
