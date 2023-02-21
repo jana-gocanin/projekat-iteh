@@ -26,7 +26,7 @@ const Home = ({ idKorisnika, cartDogs, setCartDogs, cartNum, setCartNum, data, s
     if (response.status === 200) {
       setData(data.map((dog) => {
         if (dog.id === id) {
-          dog.iznos = response.data.iznos;
+          dog.amount = response.data.iznos;
         } return dog;
       }))
     }
