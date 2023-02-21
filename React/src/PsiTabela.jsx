@@ -41,14 +41,61 @@ function PsiTabela({ data, setData, showAddPas, pas, setPas }) {
     console.log($('#table').DataTable().row($(this).closest('tr')));
     let z = $('#table').DataTable().row($(this).closest('tr')).data();
   console.log(z);
-    setPas(z);
+    setPas(z.id);
     showAddPas();
   });
 
   }, [data])
    
     
+
+//BRISANJE
+const handleDeleteRow = () => {
   
+
+  if (selectedRow.length > 0) {
+    const data = selectedRow.data();
+    const id = data.id;
+
+    axios.delete(`pas/delete/${id}`)
+      .then(response => {
+        setData(prevData => prevData.filter(item => item.id !== id));
+        selectedRow.remove().draw();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+};
+
+$('#table .btnDelete').on('click', function () {
+//   console.log($('#table').DataTable().row($(this).closest('tr')));
+//   let z = $('#table').DataTable().row($(this).closest('tr')).data();
+// console.log(z);
+//   setPas(z.id);
+//   showAddPas();
+
+
+if (selectedRow.length > 0) {
+  const data = selectedRow.data();
+  const id = data.id;
+
+  axios.delete(`pas/delete/${id}`)
+    .then(response => {
+      setData(prevData => prevData.filter(item => item.id !== id));
+      selectedRow.remove().draw();
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+
+});
+
+
+
+
 
 
 //   const handleAddData = (newData) => {

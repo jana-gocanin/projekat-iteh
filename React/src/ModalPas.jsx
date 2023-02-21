@@ -100,6 +100,35 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
         }
     };
 
+    const updatePas = async (e) => {
+      e.preventDefault();
+      var config = {
+          method: "put",
+          url: "pas/update/{id}",
+          headers: {
+            Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+          },
+          data: state,
+        };
+  const res = await axios(config);
+      if (res.data.status===200) {
+          console.log(res.data.message);
+          setState({
+          id: '',
+          ime: '',
+          godine: '',
+            boja: '',
+            tezina: '',
+            vakcina_id: '',
+            img:''
+          });
+        setData(res.data.response.original);
+        closeModal();
+        setPas(null);
+        //$('#table').DataTable().ajax.reload();
+      }
+  };
+
   return (
     <>
     <div className="modal" id="modalDodavanjePsa" role="dialog" style={{display:'block'}}> 
@@ -113,7 +142,7 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
         </div>
         <div className="modal-body">
           <div className="container tim-form">
-            <form method="post" id="dodaj-form-pas" onSubmit={savePas}>
+            <form method="post" id="dodaj-form-pas" onSubmit={pas? updatePas : savePas}>
               <h3 id="naslov" style={{ color: "black" }} text-align="center">
                 Dodavanje psa
               </h3>
