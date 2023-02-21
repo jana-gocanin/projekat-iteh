@@ -25,6 +25,7 @@ class PasController extends Controller
             'godine' => 'required',
             'boja' => 'required|string|max:50',
             'tezina' => 'required',
+            //'img' => 'required'
 
             //  'vakcina_id' => 'required'
         ]);
@@ -33,7 +34,7 @@ class PasController extends Controller
             return response()->json($validator->errors());
         }
 
-        $requestPas = $request->only('ime', 'godine', 'boja', 'tezina', 'vakcina_id');
+        $requestPas = $request->only('ime', 'godine', 'boja', 'tezina', 'vakcina_id', 'img');
         $pas = Pas::create($requestPas);
 
         return response()->json(['message' => 'Pas je uspesno kreiran.', 'status' => 200, new PasJson($pas), 'response' => $this->getAll()]);
@@ -60,8 +61,8 @@ class PasController extends Controller
     public function getAllUnadopted()
     {
         $psi = Pas::doesntHave('ugovor')->get();
+        return response()->json($psi);
 
-        return PasJson::collection($psi);
     }
 
     public function update(Request $request, $id)
@@ -71,7 +72,8 @@ class PasController extends Controller
             'godine' => 'required',
             'boja' => 'required|string|max:50',
             'tezina' => 'required',
-            'vakcina_id' => 'required'
+            'vakcina_id' => 'required',
+            'img' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -85,6 +87,7 @@ class PasController extends Controller
         $pas->boja = $request->boja;
         $pas->tezina = $request->tezina;
         $pas->vakcina_id = $request->vakcina_id;
+        $pas->img = $request->img;
 
         $pas->save();
 

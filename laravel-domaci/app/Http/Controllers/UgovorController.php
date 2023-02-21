@@ -6,6 +6,7 @@ use App\Http\Resources\UgovorJson;
 use App\Models\Ugovor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class UgovorController extends Controller
 {
@@ -47,6 +48,16 @@ class UgovorController extends Controller
 
         return response()->json('Ugovor je uspesno obrisan');
 
+    }
+
+    public function join()
+    {
+        $ugovori = DB::table('ugovors')
+            ->join('udomiteljs', 'ugovors.udomitelj_id', '=', 'udomiteljs.id')
+            ->join('pas', 'ugovors.pas_id', '=', 'pas.id')
+            ->select('ugovors.*', DB::raw('concat(udomiteljs.ime, " ", udomiteljs.prezime) as udomitelj'), 'pas.ime')
+            ->get();
+        return response()->json($ugovori);
     }
 
 }

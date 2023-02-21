@@ -15,7 +15,7 @@ return new class extends Migration {
         //
 
         Schema::table('pas', function (Blueprint $table) {
-            $table->foreignId('vakcina_id')->unique()->nullable();
+            $table->foreignId('vakcina_id')->nullable();
         });
     }
 

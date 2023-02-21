@@ -14,6 +14,12 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
         boja: pas?.boja||'',
         tezina: pas?.tezina||'',
         vakcina_id: pas?.vakcina_id||'',
+        img:pas?.img||''
+      });
+      const [vakc, setVakc] = useState({
+        id: '',
+          naziv: '',
+            vakcine: [] 
       });
   useEffect(() => {
     setState({
@@ -23,6 +29,7 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
       boja: pas?.boja || '',
       tezina: pas?.tezina || '',
       vakcina_id: pas?.vakcina_id || '',
+      img:pas?.img||''
     });
   }, [pas]);
       const handleInput = (e) => {
@@ -31,6 +38,25 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
           [e.target.name]: e.target.value,
         });
       };
+
+      const handleVakcina = (event) => {
+        const vakcinaId = event.target.value;
+        setState((prevState) => ({
+          ...prevState,
+          vakcina_id: vakcinaId,
+        }));
+      };
+      useEffect(() => {
+        const fetchVakc = async () => {
+          const response = await axios.get('vakcina/getAll');
+          setVakc(prevState => ({
+            ...prevState,
+            vakcine: response.data
+          }));
+        };
+      
+        fetchVakc();
+      }, []);
     
       // function refresh() {
       //   var config = {
@@ -65,6 +91,7 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
               boja: '',
               tezina: '',
               vakcina_id: '',
+              img:''
             });
           setData(res.data.response.original);
           closeModal();
@@ -141,10 +168,28 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
                     />
                   </div>
                   <div className="form-group">
+                    <input
+                      type="text"
+                      style={{ border: "1px solid black" }}
+                      name="img"
+                      className="form-control"
+                      placeholder="Slika *"
+                     
+                      onChange={handleInput}
+                      value={state.img}
+                    />
+                  </div>
+                  <div className="form-group">
                     <label>Vakcina: </label>
                     <select
-                    name="vakcina_id">
-                      <option id="" value=""></option>
+                    name="vakcina_id" onClick={handleVakcina}>
+                      {/* <option id="" value=""></option> */}
+                      {vakc.vakcine.map((vakc) => (
+    <option key={vakc.id} value={vakc.id}>
+      {vakc.naziv} 
+    </option>
+
+  ))}
                     </select>
                   </div>
                   <div className="form-group">
@@ -249,8 +294,9 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
                   <div className="form-group">
                     <label>Vakcina </label>
                     <select
-                    name="vakcina_id">
-                      <option id="" value=""></option>
+                    name="vakcina_id" >
+                        
+                     
                     </select>
                   </div>
                   <div className="form-group">

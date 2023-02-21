@@ -23,8 +23,11 @@ function UgovoriTabela({ugovor, setUgovor}) {
                     { "data": "id" },
                     { "data": "potpisano"},
                     { "data": "datum_potpisa" },
-                    { "data": "udomitelj_id" },
-                    { "data": "pas_id" },
+                    { "data": "udomitelj" },
+                   
+                 
+                    { "data": "ime" },
+
                     { "data": null, defaultContent: "<button id='deleteUgovor' class='btnDelete'>delete</button>", targets: -1 }
                   ]
                 },
@@ -39,7 +42,7 @@ function UgovoriTabela({ugovor, setUgovor}) {
               }, [ugovor]);
 
     useEffect(() => {
-      axios.get('ugovor/getAll')
+      axios.get('ugovor/join')
         .then(response => {
           setUgovor(response.data);
           console.log(response.data);
@@ -58,7 +61,9 @@ function UgovoriTabela({ugovor, setUgovor}) {
     <th>id</th>
       <th>potpisano</th>
       <th>datum potpisa</th>
-      <th>Udomitelj</th>
+      <th>Udomitelj </th>
+      {/* <th>Ime</th>
+      <th>Prezime</th> */}
         <th>Pas  </th>
       <th>Selektuj</th>
     </tr>

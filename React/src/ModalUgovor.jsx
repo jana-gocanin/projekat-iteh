@@ -33,7 +33,7 @@ function ModalUgovor({ugovor, setUgovor, closeModalUgovor}) {
 
   useEffect(() => {
     const fetchPsi = async () => {
-      const response = await axios.get('pas/getAll');
+      const response = await axios.get('pas/getAllUnadopted');
       setPas(prevState => ({
         ...prevState,
         psi: response.data

@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\VakcinaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasController;
@@ -33,16 +34,22 @@ Route::get('udomitelj/id/{id}', [UdomiteljController::class, 'getById'])->name('
 Route::get('ugovor/getAll', [UgovorController::class, 'getAll'])->name('ugovor.getAll');
 Route::get('ugovor/id/{id}', [UgovorController::class, 'getById'])->name('ugovor.getById');
 
+Route::get('ugovor/join', [UgovorController::class, 'join']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::get('vakcina/getAll', [VakcinaController::class, 'getAll']);
 
 
 Route::group(
     ['middleware' => ['auth:sanctum']],
     function () {
-        Route::get('/profile', function (Request $request) {
-            return auth()->user();
-        }
+        Route::get(
+            '/profile',
+            function (Request $request) {
+                    return auth()->user();
+                }
         );
         Route::post('pas/add', [PasController::class, 'add'])->name('pas.add');
         Route::delete('pas/delete/{id}', [PasController::class, 'delete'])->name('pas.delete');

@@ -10,6 +10,7 @@ class Vakcina extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'naziv'
     ];
 
