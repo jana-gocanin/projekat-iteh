@@ -5,7 +5,14 @@ import $ from 'jquery';
 
 function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
 
-
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // prevent default form submission behavior
+    if (pas) {
+      await updatePas(e); // handle updatePas
+    } else {
+      await savePas(e); // handle savePas
+    }
+  };
   
     const [state, setState] = useState({
         id: pas?.id||'',
@@ -104,7 +111,7 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
       e.preventDefault();
       var config = {
           method: "put",
-          url: "pas/update/{id}",
+          url: "pas/update/"+pas.id,
           headers: {
             Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
           },
@@ -123,7 +130,7 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
             img:''
           });
         setData(res.data.response.original);
-        closeModal();
+        closeModalUpdatePas();
         setPas(null);
         //$('#table').DataTable().ajax.reload();
       }
@@ -136,13 +143,14 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
       {/*Sadrzaj modala*/}
       <div className="modal-content" style={{ border: "4px solid green" }}>
         <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal"  onClick={closeModal}>
+          <button type="button" className="close" data-dismiss="modal"  onClick={pas ? closeModalUpdatePas : closeModal}>
             ×
           </button>
         </div>
         <div className="modal-body">
           <div className="container tim-form">
-            <form method="post" id="dodaj-form-pas" onSubmit={pas? updatePas : savePas}>
+                <form method="post" id="dodaj-form-pas" onSubmit={handleSubmit
+            }>
               <h3 id="naslov" style={{ color: "black" }} text-align="center">
                 Dodavanje psa
               </h3>

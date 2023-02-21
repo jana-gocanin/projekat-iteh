@@ -6,6 +6,8 @@ use App\Http\Resources\PasJson;
 use App\Models\Pas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+
 
 class PasController extends Controller
 {
@@ -92,5 +94,36 @@ class PasController extends Controller
         $pas->save();
 
         return response()->json(['Pas je uspesno azuriran.', new PasJson($pas)]);
+    }
+
+    public function donation($id){
+        $user=User::findOrFail($id);
+        //dd($user->donation);
+        foreach($user->donation as $singleDonation){
+            dd($singleDonation->pivot->iznos);
+        }
+
+        return response()->json(['response'=>$user->donation()]);
+    }
+
+    public function amount(Request $request){
+        $idKorisnika=$request->idKorisnika;
+        $id = $request->id;
+        $user=User::findorFail($idKorisnika);
+        $pas=Pas::findOrFail($id);
+    
+        $iznos= $user->donation()->where(['user_id'=>$idKorisnika, 'pas_id'=>$id])->first();
+        if($iznos){
+            $iznos=$iznos->pivot->iznos+100;
+        }else{
+            $iznos = 100;
+            
+        }
+        $success = $user->donation()->syncWithoutDetaching([$pas->id => ['iznos'=>$iznos]]);
+        
+        if($success){
+            return response()->json(['id'=>$id, 'iznos'=>$iznos]);
+        }
+        return response()->json(['id'=>$id, 'iznos'=>0]);
     }
 }

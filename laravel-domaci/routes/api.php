@@ -41,6 +41,9 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('vakcina/getAll', [VakcinaController::class, 'getAll']);
 
+Route::get('pas/donation/{id}', [PasController::class, 'donation']);
+Route::post('pas/amount', [PasController::class, 'amount']);
+
 
 Route::group(
     ['middleware' => ['auth:sanctum']],

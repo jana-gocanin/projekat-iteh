@@ -36,4 +36,8 @@ class Pas extends Model
         return false;
     }
 
+    public function donation(){
+        return $this->belongsToMany(Pas::class, 'user_pas', 'pas_id', 'user_id')->withPivot('iznos');
+    }
+
 }

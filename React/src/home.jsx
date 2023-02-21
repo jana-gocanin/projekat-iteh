@@ -1,46 +1,65 @@
 import React, {useState} from 'react'
 import Dogs from './dogs'
 import ReactPaginate from 'react-paginate'
+import axios from 'axios';
 
-const Home = ({cartDogs, setCartDogs, cartNum, setCartNum, data, setData}) => {
-    const dogsPerPage = 5;
+const Home = ({ idKorisnika, cartDogs, setCartDogs, cartNum, setCartNum, data, setData }) => {
+  const dogsPerPage = 5;
   
   
   const [currentPage, setCurrentPage] = useState(1);
   
-  const addToCart = (id) => {
-    setData(data.map((dog) => {
+  const addToCart = (idKorisnika, id, data) => {
+    setData(data?.map((dog) => {
       if (dog.id === id) {
-        dog.amount = dog.amount + 100;
-        const a = cartNum + 100;
-        setCartNum(a);
-        if (dog.amount === 100) {
-          updateCart(dog);
-        } else {
-          refreshCart();
-        }
+        var config = {
+          method: "post",
+          url: "pas/amount",
+          headers: {
+            Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+          },
+          data: {
+            id: id,
+            idKorisnika: idKorisnika
+          },
+        }; axios(config).then((res) => { console.log(res.data) })
+        //const res = await axios(config);
+        //dog.amount = dog.amount + 100;
+        //     const a = cartNum + 100;
+        //     setCartNum(a);
+        //     if (dog.amount === 100) {
+        //       updateCart(dog);
+        //     } else {
+        //       refreshCart();
+        //     }
 
-        console.log("dog id=", dog.id, "amount=", dog.amount);
+        //     console.log("dog id=", dog.id, "amount=", dog.amount);
       }
-      return dog;
+      //   return dog;
+
     }
     ))
-};
-  const remFromCart = (id) => {
-    setData(data.map((dog) => {
-      if (dog.id === id) {
-        if (dog.amount > 0) {
-          dog.amount = dog.amount - 100;
-          const a = cartNum - 100;
-          setCartNum(a);
-          refreshCart();
-          console.log("dog id=", dog.id, "amount=", dog.amount);
-        } else {
-          alert("Iznos za doniranje je 0.");
-        }
-      }
-      return dog;
-    }));
+
+
+
+  }
+
+    ;
+  const remFromCart = () => {
+    // setData(data.map((dog) => {
+    //   if (dog.id === id) {
+    //     if (dog.amount > 0) {
+    //       dog.amount = dog.amount - 100;
+    //       const a = cartNum - 100;
+    //       setCartNum(a);
+    //       refreshCart();
+    //       console.log("dog id=", dog.id, "amount=", dog.amount);
+    //     } else {
+    //       alert("Iznos za doniranje je 0.");
+    //     }
+    //   }
+    //   return dog;
+    // }));
 
   };
 
@@ -60,9 +79,10 @@ const Home = ({cartDogs, setCartDogs, cartNum, setCartNum, data, setData}) => {
   return (
     <>
       <Dogs
-              data={data.slice(currentPage * dogsPerPage - dogsPerPage, currentPage * dogsPerPage)}
+              data={data?.slice(currentPage * dogsPerPage - dogsPerPage, currentPage * dogsPerPage)}
               onAdd={addToCart}
-              onRemove={remFromCart}
+        onRemove={remFromCart}
+        idKorisnika={idKorisnika}
           
             />
             <ReactPaginate

@@ -26,6 +26,7 @@ function Login({selektujAdmina}) {
         console.log(res.data);
         window.sessionStorage.setItem("auth_token", res.data.access_token);
         window.sessionStorage.setItem("isAdmin", +res.data.isAdmin);
+        window.sessionStorage.setItem("id", +res.data.id);
           if (res.data.isAdmin == 1) {
           selektujAdmina(1);
           console.log('isadmin =1');

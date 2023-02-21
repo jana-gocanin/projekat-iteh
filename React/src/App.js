@@ -18,6 +18,7 @@ function App()  {
   const [cartDogs, setCartDogs] = useState([]);
   const [cartNum, setCartNum] = useState(0);
   const [isAdmin, setIsAdmin] = useState(window.sessionStorage.getItem('isAdmin'));
+  const [idKorisnika, setIdKorisnika] = useState(window.sessionStorage.getItem('id'));
   const [isLoggedIn, setIsLoggedIn] = useState(window.sessionStorage.getItem('auth_token'));
   const [data, setData] = useState([]);
 
@@ -52,15 +53,15 @@ function App()  {
   element={+isAdmin ? (
     <>
       <AdminNavBar />
-      <AdminPage data={data} setData={(a) => {
-        debugger; setData(a)
-      }
+      <AdminPage data={data} setData={
+        setData
+      
       }/>
     </>
   ) : (
     <>
       <NavBar cartNum={cartNum} />
-      <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData}/>
+        <Home idKorisnika={idKorisnika} cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData}/>
     </>
   )}
 />
@@ -98,7 +99,7 @@ function App()  {
   ) : (
     <>
       <NavBar cartNum={cartNum} />
-              <Home cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData} />
+              <Home idKorisnika={idKorisnika}  cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData} />
     </> )} />
         <Route path="/breeds" element={(isAdmin==1) ? (
     <>

@@ -41,7 +41,7 @@ function PsiTabela({ data, setData, showAddPas, pas, setPas }) {
     console.log($('#table').DataTable().row($(this).closest('tr')));
     let z = $('#table').DataTable().row($(this).closest('tr')).data();
   console.log(z);
-    setPas(z.id);
+    setPas(z);
     showAddPas();
   });
 
@@ -50,45 +50,45 @@ function PsiTabela({ data, setData, showAddPas, pas, setPas }) {
     
 
 //BRISANJE
-const handleDeleteRow = () => {
+// const handleDeleteRow = () => {
   
 
-  if (selectedRow.length > 0) {
-    const data = selectedRow.data();
-    const id = data.id;
+//   if (selectedRow.length > 0) {
+//     const data = selectedRow.data();
+//     const id = data.id;
 
-    axios.delete(`pas/delete/${id}`)
-      .then(response => {
-        setData(prevData => prevData.filter(item => item.id !== id));
-        selectedRow.remove().draw();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-};
+//     axios.delete(`pas/delete/${id}`)
+//       .then(response => {
+//         setData(prevData => prevData.filter(item => item.id !== id));
+//         selectedRow.remove().draw();
+//       })
+//       .catch(error => {
+//         console.log(error);
+//       });
+//   }
+// };
 
 $('#table .btnDelete').on('click', function () {
-//   console.log($('#table').DataTable().row($(this).closest('tr')));
-//   let z = $('#table').DataTable().row($(this).closest('tr')).data();
-// console.log(z);
-//   setPas(z.id);
-//   showAddPas();
+   console.log($('#table').DataTable().row($(this).closest('tr')));
+   let z = $('#table').DataTable().row($(this).closest('tr')).data();
+ console.log(z);
+   setPas(z);
+   showAddPas();
 
 
-if (selectedRow.length > 0) {
-  const data = selectedRow.data();
-  const id = data.id;
+// if (selectedRow.length > 0) {
+//   const data = selectedRow.data();
+//   const id = data.id;
 
-  axios.delete(`pas/delete/${id}`)
-    .then(response => {
-      setData(prevData => prevData.filter(item => item.id !== id));
-      selectedRow.remove().draw();
-    })
-    .catch(error => {
-      console.log(error);
-    });
-}
+//   axios.delete(`pas/delete/${id}`)
+//     .then(response => {
+//       setData(prevData => prevData.filter(item => item.id !== id));
+//       selectedRow.remove().draw();
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// }
 
 
 });
