@@ -182,7 +182,8 @@ function ModalUgovor({ugovor, setUgovor, closeModalUgovor}) {
                     />
                   </div>
                   <div className="form-group">
-                    <select name="pas_id"  onChange={handlePasChange}>
+                    <select name="pas_id"  onChange={handlePasChange} value={state.pas_id || ''}>
+                    <option value="">-- Select  pas --</option>
                     {pas.psi.map((pas) => (
     <option key={pas.id} value={pas.id}>
       {pas.ime} 
@@ -196,7 +197,8 @@ function ModalUgovor({ugovor, setUgovor, closeModalUgovor}) {
                     </select>
                   </div>
                   <div className="form-group">
-                    <select name="udomitelj_id" onChange={handleUdomiteljChange}>
+                    <select name="udomitelj_id" onChange={handleUdomiteljChange} value={state.udomitelj_id || ''}>
+                    <option value="">-- Select  udomitelj --</option>
                     {udomitelj.udomitelji.map((udomitelj) => (
     <option key={udomitelj.id} value={udomitelj.id}>
       {udomitelj.ime} {udomitelj.prezime}
