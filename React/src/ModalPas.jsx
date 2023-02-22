@@ -152,7 +152,7 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
                 <form method="post" id="dodaj-form-pas" onSubmit={handleSubmit
             }>
               <h3 id="naslov" style={{ color: "black" }} text-align="center">
-                Dodavanje psa
+                Pas
               </h3>
               <div className="row">
                 <div className="col-md-6">
@@ -239,7 +239,7 @@ function ModalPas({closeModal, closeModalUpdatePas, setData, pas, setPas}) {
                         border: "1px solid black"
                       }}
                     >
-                      <i className="glyphicon glyphicon-plus" /> Dodaj
+                      <i className="glyphicon glyphicon-plus" /> Sačuvaj
                     </button>
                   </div>
                 </div>

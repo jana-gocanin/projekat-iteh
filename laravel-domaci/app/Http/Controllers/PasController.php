@@ -29,6 +29,11 @@ class PasController extends Controller
         //  ->orWhereNull('u.id')
         //  ->get();
         // return response()->json($psi);
+
+        if($userId == null){
+            $psi = Pas::all();
+            return response()->json($psi);
+        } else{
         $psi = DB::table('pas as p')
     ->select('p.id', 'p.ime', 'p.godine','p.img', 'p.boja', 'p.tezina','p.vakcina_id', 'up.iznos', 'u.id as userId')
     ->leftJoin('user_pas as up', function($join) use ($userId) {
@@ -39,7 +44,7 @@ class PasController extends Controller
     ->leftJoin('users as u', 'up.user_id', '=', 'u.id')
     ->groupBy('p.id', 'p.ime', 'p.godine', 'p.boja','p.vakcina_id', 'p.tezina','p.img', 'up.iznos', 'u.id')
     ->get();
-return response()->json($psi);
+return response()->json($psi);}
 
 
 
@@ -67,7 +72,7 @@ return response()->json($psi);
         $requestPas = $request->only('ime', 'godine', 'boja', 'tezina', 'vakcina_id', 'img');
         $pas = Pas::create($requestPas);
 
-        return response()->json(['message' => 'Pas je uspesno kreiran.', 'status' => 200, new PasJson($pas), 'response' => $this->getAll()]);
+        return response()->json(['message' => 'Pas je uspesno kreiran.', 'status' => 200, new PasJson($pas), 'response' => $this->getAll(null)]);
     }
 
     public function getById($id)
@@ -84,7 +89,7 @@ return response()->json($psi);
     {
         $pas = Pas::destroy($id);
 
-        return response()->json(['message' => 'Pas je uspesno obrisan.', 'status' => 200, 'response' => $this->getAll()]);
+        return response()->json(['message' => 'Pas je uspesno obrisan.', 'status' => 200, 'response' => $this->getAll(null)]);
 
     }
 
@@ -122,7 +127,7 @@ return response()->json($psi);
 
         $pas->save();
 
-        return response()->json(['message' => 'Pas je uspesno azuriran.', 'status' => 200, new PasJson($pas), 'response' => $this->getAll()]);
+        return response()->json(['message' => 'Pas je uspesno azuriran.', 'status' => 200, new PasJson($pas), 'response' => $this->getAll(null)]);
     }
 
     public function donation($id){
