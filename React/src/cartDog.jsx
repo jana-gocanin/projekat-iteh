@@ -12,7 +12,7 @@ const CartDog = ({dog}) => {
         <p className="card-text">Godine: 
           {dog.godine}   
         </p>
-              <h3>Iznos: {dog.amount }</h3>
+              <h3>Iznos: {dog.iznos }</h3>
       </div>
     </div>
   );

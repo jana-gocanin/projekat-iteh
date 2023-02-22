@@ -22,13 +22,18 @@ const Home = ({ idKorisnika, cartDogs, setCartDogs, cartNum, setCartNum, data, s
       },
     };
     let response = await axios(config); 
-    debugger;
+    //debugger;
     if (response.status === 200) {
-      setData(data.map((dog) => {
+      let newData = data.map((dog) => {
         if (dog.id === id) {
-          dog.amount = response.data.iznos;
+          dog.iznos = response.data.iznos;
         } return dog;
-      }))
+      });
+      setData(newData);
+
+      let cartNumSum = 0;
+      newData.forEach(d => cartNumSum += +d.iznos);
+      setCartNum(cartNumSum);
     }
 
 
@@ -36,7 +41,40 @@ const Home = ({ idKorisnika, cartDogs, setCartDogs, cartNum, setCartNum, data, s
   }
 
     ;
-  const remFromCart = () => {
+
+    const remFromCart = async (idKorisnika, id, data) => {
+    var config = {
+      method: "post",
+      url: "pas/remove",
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+      data: {
+        id: id,
+        idKorisnika: idKorisnika
+      },
+    };
+    let response = await axios(config); 
+    //debugger;
+    if (response.status === 200) {
+      let newData = data.map((dog) => {
+        if (dog.id === id) {
+          dog.iznos = response.data.iznos;
+        } return dog;
+      });
+      setData(newData);
+
+      let cartNumSum = 0;
+      newData.forEach(d => cartNumSum += +d.iznos);
+      setCartNum(cartNumSum);
+    }
+
+
+
+  }
+
+    ;
+  //const remFromCart = () => {
     // setData(data.map((dog) => {
     //   if (dog.id === id) {
     //     if (dog.amount > 0) {
@@ -52,7 +90,7 @@ const Home = ({ idKorisnika, cartDogs, setCartDogs, cartNum, setCartNum, data, s
     //   return dog;
     // }));
 
-  };
+  //};
 
   const refreshCart = () => {
     const newDogs = data.filter((dog) => dog.amount > 0);

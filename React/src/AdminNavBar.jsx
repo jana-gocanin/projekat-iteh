@@ -36,17 +36,17 @@ function AdminNavBar({cartNum}) {
         });
 
         var intervalId = window.setInterval(function () {
-          // axios
-          //   .get("http://worldtimeapi.org/api/timezone/Europe/Belgrade")
-          //   .then((res) => {
-          //     var mySubString = res.data.datetime.substring(
-          //       res.data.datetime.indexOf("T") + 1,
-          //       res.data.datetime.lastIndexOf(".")
-          //     );
-          //     document.getElementsByClassName("txt-time-api")[0].innerHTML =
-          //       mySubString;
-          //   })
-          //   .catch((e) => console.log(e));
+           axios
+             .get("http://worldtimeapi.org/api/timezone/Europe/Belgrade")
+             .then((res) => {
+               var mySubString = res.data.datetime.substring(
+                 res.data.datetime.indexOf("T") + 1,
+                 res.data.datetime.lastIndexOf(".")
+               );
+               document.getElementsByClassName("txt-time-api")[0].innerHTML =
+                 mySubString;
+             })
+             .catch((e) => console.log(e));
         }, 1000);
 
 

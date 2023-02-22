@@ -24,10 +24,13 @@ function App()  {
 
   useEffect(() => {
     if (isLoggedIn) {
-      axios.get('pas/getAll')
+      axios.get('pas/getAll/'+idKorisnika)
         
       .then(response => {
         setData(response.data);
+        let cartNumSum = 0;
+        response.data.forEach(d => cartNumSum += +d.iznos);
+        setCartNum(cartNumSum); debugger;
         console.log(response.data);
       })
       .catch(error => {
@@ -61,7 +64,7 @@ function App()  {
   ) : (
     <>
       <NavBar cartNum={cartNum} />
-        <Home idKorisnika={idKorisnika} cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData}/>
+        <Home idKorisnika={idKorisnika} cartDogs={data} setCartDogs={setData} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData}/>
     </>
   )}
 />
@@ -75,7 +78,7 @@ function App()  {
     </>
   ) : (
     <>
-<NavBar cartNum={cartNum} /><Cart cartDogs={cartDogs} isAdmin={isAdmin} /><ContactForm /></> 
+<NavBar cartNum={cartNum} /><Cart cartDogs={data} isAdmin={isAdmin} /><ContactForm /></> 
     
   )}
 /> 
@@ -99,7 +102,7 @@ function App()  {
   ) : (
     <>
       <NavBar cartNum={cartNum} />
-              <Home idKorisnika={idKorisnika}  cartDogs={cartDogs} setCartDogs={setCartDogs} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData} />
+              <Home idKorisnika={idKorisnika}  cartDogs={data} setCartDogs={setData} cartNum={cartNum} setCartNum={setCartNum} data={data} setData={setData} />
     </> )} />
         <Route path="/breeds" element={(isAdmin==1) ? (
     <>

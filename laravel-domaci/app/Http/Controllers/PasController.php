@@ -7,16 +7,44 @@ use App\Models\Pas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 
 class PasController extends Controller
 {
-    public function getAll()
+    public function getAll($userId)
     {
-        $psi = Pas::all();
+        //$psi = Pas::all();
+        //$psi = Pas::all();
+        // $psi = Pas::whereHas('donation', function($q) use ($userId) {
+        //     $q->where('user_id', $userId)
+        //     ->orWhereNull('user_id');
+        // })->get();
+        // dd($psi->donation()->first());
+        //  $psi = DB::table('pas as p')
+        //  ->select('p.id', 'p.ime', 'p.godine', 'p.boja', 'p.tezina', 'up.iznos', 'u.id as userId')
+        //  ->leftJoin('user_pas as up', 'up.pas_id', '=', 'p.id')
+        //  ->leftJoin('users as u', 'up.user_id', '=', 'u.id')
+        //  ->where('u.id', '=', $userId)
+        //  ->orWhereNull('u.id')
+        //  ->get();
+        // return response()->json($psi);
+        $psi = DB::table('pas as p')
+    ->select('p.id', 'p.ime', 'p.godine','p.img', 'p.boja', 'p.tezina','p.vakcina_id', 'up.iznos', 'u.id as userId')
+    ->leftJoin('user_pas as up', function($join) use ($userId) {
+        $join->on('up.pas_id', '=', 'p.id')
+            ->where('up.user_id', '=', $userId)
+            ->orWhereNull('up.user_id');
+    })
+    ->leftJoin('users as u', 'up.user_id', '=', 'u.id')
+    ->groupBy('p.id', 'p.ime', 'p.godine', 'p.boja','p.vakcina_id', 'p.tezina','p.img', 'up.iznos', 'u.id')
+    ->get();
+return response()->json($psi);
+
+
 
         //return PasJson::collection($psi);
-        return response()->json($psi);
+        
     }
 
     public function add(Request $request)
@@ -112,10 +140,10 @@ class PasController extends Controller
         $id = $request->id;
         $user=User::findorFail($idKorisnika);
         $pas=Pas::findOrFail($id);
-    
+    //dd($idKorisnika);
         $iznos= $user->donation()->where(['user_id'=>$idKorisnika, 'pas_id'=>$id])->first();
         if($iznos){
-            $iznos=$iznos->pivot->iznos+100;
+            $iznos = $iznos->pivot->iznos + 100;
         }else{
             $iznos = 100;
             
@@ -123,8 +151,37 @@ class PasController extends Controller
         $success = $user->donation()->syncWithoutDetaching([$pas->id => ['iznos'=>$iznos]]);
         
         if($success){
-            return response()->json(['id'=>$id, 'iznos'=>$iznos]);
+            return response()->json(['id'=>$id, 'iznos'=>$iznos, 'idKorisnika'=>$idKorisnika]);
         }
-        return response()->json(['id'=>$id, 'iznos'=>0]);
+        return response()->json(['id'=>$id, 'iznos'=>0, 'idKorisnika'=>$idKorisnika]);
+    }
+
+    public function remove(Request $request){
+        $idKorisnika=$request->idKorisnika;
+        $id = $request->id;
+        $user=User::findorFail($idKorisnika);
+        $pas=Pas::findOrFail($id);
+        $iznos= $user->donation()->where(['user_id'=>$idKorisnika, 'pas_id'=>$id])->first();
+        if($iznos){
+            $iznos = $iznos->pivot->iznos - 100;
+        }else{
+            $iznos = 0;
+            
+        }
+        $success = $user->donation()->syncWithoutDetaching([$pas->id => ['iznos'=>$iznos]]);
+        
+        if($success){
+            return response()->json(['id'=>$id, 'iznos'=>$iznos, 'idKorisnika'=>$idKorisnika]);
+        }
+        return response()->json(['id'=>$id, 'iznos'=>0, 'idKorisnika'=>$idKorisnika]);
+    }
+
+    public function join()
+    {
+        $psi = DB::table('pas')
+            ->join('pas', 'user_pas.pas_id', '=', 'pas.id')
+            ->select('pas.*',  'user_pas.iznos')
+            ->get();
+        return response()->json($psi);
     }
 }

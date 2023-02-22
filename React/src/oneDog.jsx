@@ -13,10 +13,13 @@ const OneDog = ({idKorisnika, data, dog, onAdd, onRemove}) => {
         <p className="card-text">Godine: 
           {dog.godine}   
         </p>
+        <p className="card-text">Iznos: 
+          {dog.iznos || '/'}   
+        </p>
         <h3 className="card-title">Klikom na dugme + doniraš 100 rsd za psa po imenu {dog.ime}!</h3>
         <div className='card-btn-wrapper'>
           <div className="btn" onClick={() => onAdd(idKorisnika, dog.id, data)}><ImPlus /></div>
-          <div className="btn" onClick={() => onRemove()}><ImMinus /></div>
+          <div className="btn" onClick={() => onRemove(idKorisnika, dog.id, data)}><ImMinus /></div>
           </div>
       </div>
     </div>

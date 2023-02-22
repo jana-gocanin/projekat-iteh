@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('pas/getAll', [PasController::class, 'getAll'])->name('pas.getAll');
+Route::get('pas/getAll/{userId}', [PasController::class, 'getAll'])->name('pas.getAll');
 Route::get('pas/id/{id}', [PasController::class, 'getById'])->name('pas.getById');
 Route::get('pas/getAllUnadopted', [PasController::class, 'getAllUnadopted'])->name('pas.getAllUnadopted');
 
@@ -43,6 +43,8 @@ Route::get('vakcina/getAll', [VakcinaController::class, 'getAll']);
 
 Route::get('pas/donation/{id}', [PasController::class, 'donation']);
 Route::post('pas/amount', [PasController::class, 'amount']);
+Route::post('pas/remove', [PasController::class, 'remove']);
+Route::get('pas/join', [PasController::class, 'join']);
 
 
 Route::group(
