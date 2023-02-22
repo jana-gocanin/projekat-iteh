@@ -147,6 +147,7 @@ return response()->json($psi);}
         $pas=Pas::findOrFail($id);
     //dd($idKorisnika);
         $iznos= $user->donation()->where(['user_id'=>$idKorisnika, 'pas_id'=>$id])->first();
+        //dd($iznos);
         if($iznos){
             $iznos = $iznos->pivot->iznos + 100;
         }else{

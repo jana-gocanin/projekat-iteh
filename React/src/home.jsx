@@ -9,7 +9,7 @@ const Home = ({ idKorisnika, cartDogs, setCartDogs, cartNum, setCartNum, data, s
   
   const [currentPage, setCurrentPage] = useState(1);
   
-  const addToCart = async (idKorisnika, id, data) => {
+  const addToCart = async (idKorisnika, id) => {
     var config = {
       method: "post",
       url: "pas/amount",
@@ -42,7 +42,7 @@ const Home = ({ idKorisnika, cartDogs, setCartDogs, cartNum, setCartNum, data, s
 
     ;
 
-    const remFromCart = async (idKorisnika, id, data) => {
+    const remFromCart = async (idKorisnika, id) => {
     var config = {
       method: "post",
       url: "pas/remove",

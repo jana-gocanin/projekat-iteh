@@ -6,7 +6,7 @@ const Dogs = ({data, onAdd, onRemove, idKorisnika}) => {
     <div className='all-dogs'>
       {data?.map((dog) => (
         <OneDog idKorisnika={idKorisnika}
-          data={data}
+          
           key={dog.id}
           dog={dog}
           onAdd={onAdd}
